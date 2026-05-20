@@ -30,20 +30,18 @@ export default function HeroSection() {
     <section className="relative overflow-hidden bg-[#03131d] text-white">
       {/* VIDEO */}
       <video
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="auto"
-        controls={false}
-        disablePictureInPicture
-        className="absolute inset-0 h-full w-full object-cover"
-      >
-        <source
-          src="/videos/ocean-bg.mp4"
-          type="video/mp4"
-        />
-      </video>
+  autoPlay
+  muted
+  loop
+  playsInline
+  preload="auto"
+  controls={false}
+  disablePictureInPicture
+  poster="/images/ocean-poster.jpg" // ഇവിടെ ഒരു നല്ല ബാക്ക്ഗ്രൗണ്ട് ഫോട്ടോയുടെ പാത്ത് കൊടുക്കുക
+  className="absolute inset-0 h-full w-full object-cover"
+>
+  <source src="/videos/ocean-bg.mp4" type="video/mp4" />
+</video>
 
       {/* OVERLAYS */}
       <div className="absolute inset-0 z-[1] bg-[#041520]/80" />
