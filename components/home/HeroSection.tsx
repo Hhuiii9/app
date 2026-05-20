@@ -2,6 +2,7 @@
 
 "use client";
 
+import { useEffect, useRef } from "react";
 import Link from "next/link";
 import {
   ArrowRight,
@@ -26,22 +27,42 @@ const features = [
 ];
 
 export default function HeroSection() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (video) {
+      // മൊബൈലിൽ ഓട്ടോപ്ലേ വർക്ക് ചെയ്യാൻ വേണ്ടി 100% മ്യൂട്ട് ആണെന്ന് ഉറപ്പാക്കുന്നു
+      video.muted = true;
+      video.defaultMuted = true;
+      
+      // വീഡിയോ നിർബന്ധപൂർവ്വം പ്ലേ ചെയ്യിക്കുന്നു
+      video.play().catch((error) => {
+        console.log("Autoplay prevented on mobile:", error);
+      });
+    }
+  }, []);
+
   return (
     <section className="relative overflow-hidden bg-[#03131d] text-white">
-      {/* VIDEO */}
+      {/* VIDEO SECTION */}
       <video
-  autoPlay
-  muted
-  loop
-  playsInline
-  preload="auto"
-  controls={false}
-  disablePictureInPicture
-  poster="/images/ocean-poster.jpg" // ഇവിടെ ഒരു നല്ല ബാക്ക്ഗ്രൗണ്ട് ഫോട്ടോയുടെ പാത്ത് കൊടുക്കുക
-  className="absolute inset-0 h-full w-full object-cover"
->
-  <source src="/videos/ocean-bg.mp4" type="video/mp4" />
-</video>
+        ref={videoRef}
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="auto"
+        controls={false}
+        disablePictureInPicture
+        className="absolute inset-0 h-full w-full object-cover"
+      >
+        <source
+          src="/videos/ocean-bg.mp4"
+          type="video/mp4"
+        />
+        Your browser does not support the video tag.
+      </video>
 
       {/* OVERLAYS */}
       <div className="absolute inset-0 z-[1] bg-[#041520]/80" />
@@ -88,7 +109,6 @@ export default function HeroSection() {
               className="inline-flex items-center justify-center gap-2 rounded-full bg-cyan-400 px-5 py-3 text-[10px] font-black uppercase tracking-[0.16em] text-slate-950 transition-all duration-300 hover:scale-105 hover:bg-cyan-300 sm:px-7 sm:py-4 sm:text-xs"
             >
               Explore Courses
-
               <ArrowRight className="h-4 w-4" />
             </Link>
 
@@ -101,9 +121,6 @@ export default function HeroSection() {
           </div>
 
           {/* FEATURES */}
-          {/* OPTIONAL SECTION */}
-          {/* REMOVE THIS WHOLE BLOCK IF NOT NEEDED */}
-
           <div className="mt-6 flex flex-wrap items-center justify-center gap-2 sm:mt-8 sm:gap-3">
             {features.map((item, index) => {
               const Icon = item.icon;
