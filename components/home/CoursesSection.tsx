@@ -11,6 +11,8 @@ import {
   ArrowRight,
 } from "lucide-react";
 
+const whatsappNumber = "916235106062";
+
 const courses = [
   {
     icon: Waves,
@@ -47,15 +49,12 @@ const courses = [
 export default function CoursesSection() {
   return (
     <section className="relative overflow-hidden bg-slate-950 px-4 py-16 text-white sm:px-6 sm:py-24 md:py-28">
-      
       {/* LIGHT EFFECT */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(6,182,212,0.14),transparent_45%)]" />
 
       <div className="relative z-10 mx-auto max-w-7xl">
-        
         {/* TOP */}
         <div className="mb-9 flex flex-col gap-5 sm:mb-14 lg:flex-row lg:items-end lg:justify-between">
-          
           <div>
             <p className="text-[10px] font-black uppercase tracking-[0.28em] text-cyan-400 sm:text-xs">
               Professional Courses
@@ -63,15 +62,14 @@ export default function CoursesSection() {
 
             <h2 className="mt-4 max-w-4xl text-[30px] font-black leading-[1.08] text-white sm:text-5xl md:text-6xl">
               Diving Training
-              <span className="text-cyan-400">
-                {" "}
-                Programs
-              </span>
+              <span className="text-cyan-400"> Programs</span>
             </h2>
           </div>
 
-          <Link
-            href="/courses"
+          <a
+            href={`https://wa.me/${whatsappNumber}?text=Hello%20Dive%20Hub%20%26%20Marine%20Services,%20I%20want%20to%20know%20more%20about%20your%20courses.`}
+            target="_blank"
+            rel="noopener noreferrer"
             className="
               inline-flex
               w-fit
@@ -99,13 +97,15 @@ export default function CoursesSection() {
             View All Courses
 
             <ArrowRight className="h-4 w-4" />
-          </Link>
+          </a>
         </div>
 
         {/* COURSES */}
         <div className="grid grid-cols-2 gap-3 sm:gap-5 md:grid-cols-2 lg:grid-cols-3">
           {courses.map((course, index) => {
             const Icon = course.icon;
+
+            const message = `Hello Dive Hub & Marine Services, I want to know more about the ${course.title} course.`;
 
             return (
               <div
@@ -130,7 +130,6 @@ export default function CoursesSection() {
                 <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/0 to-cyan-500/10 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
                 <div className="relative z-10">
-                  
                   {/* ICON */}
                   <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-cyan-500/10 sm:mb-5 sm:h-16 sm:w-16 sm:rounded-2xl">
                     <Icon className="h-5 w-5 text-cyan-400 sm:h-7 sm:w-7" />
@@ -147,8 +146,12 @@ export default function CoursesSection() {
                   </p>
 
                   {/* BUTTON */}
-                  <Link
-                    href="/courses"
+                  <a
+                    href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
+                      message
+                    )}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="
                       mt-4
                       inline-flex
@@ -170,7 +173,7 @@ export default function CoursesSection() {
                     Explore
 
                     <ArrowRight className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
-                  </Link>
+                  </a>
                 </div>
               </div>
             );
