@@ -2,9 +2,10 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ArrowRight } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const navLinks = [
   { name: "Home", href: "/" },
@@ -19,10 +20,12 @@ export default function Navbar() {
   const pathname = usePathname();
 
   return (
-    <header className="fixed top-0 z-[9999] w-full border-b border-slate-200 bg-white shadow-sm">
-      <div className="mx-auto flex max-w-7xl items-center justify-between bg-white px-4 py-4 sm:px-6">
-        <Link href="/" className="flex items-center gap-3">
-          <div className="relative h-12 w-12 overflow-hidden rounded-full border border-cyan-200 bg-white shadow-sm sm:h-14 sm:w-14">
+    <header className="fixed top-0 left-0 w-full z-[99] border-b border-white/5 bg-[#03131d]/70 backdrop-blur-2xl transition-all duration-300">
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 sm:px-8">
+        
+        {/* BRAND LOGO */}
+        <Link href="/" className="flex items-center gap-3 group">
+          <div className="relative h-12 w-12 overflow-hidden rounded-full border border-white/10 bg-white/5 shadow-lg sm:h-13 sm:w-13 transition-transform duration-300 group-hover:scale-105">
             <Image
               src="/logo.png"
               alt="Dive Hub & Marine Services"
@@ -33,15 +36,16 @@ export default function Navbar() {
           </div>
 
           <div>
-            <h1 className="text-sm font-black uppercase tracking-wide text-slate-900 sm:text-lg">
+            <h1 className="text-xs sm:text-sm font-black uppercase tracking-[0.2em] text-white group-hover:text-cyan-300 transition-colors duration-300">
               Dive Hub
             </h1>
-            <p className="text-[9px] uppercase tracking-[0.2em] text-cyan-600 sm:text-[11px]">
+            <p className="text-[8px] sm:text-[9px] uppercase tracking-[0.25em] text-cyan-400 font-medium mt-0.5">
               Marine Services
             </p>
           </div>
         </Link>
 
+        {/* DESKTOP NAV LINKS */}
         <nav className="hidden items-center gap-8 lg:flex">
           {navLinks.map((link) => {
             const isActive = pathname === link.href;
@@ -50,47 +54,60 @@ export default function Navbar() {
               <Link
                 key={link.name}
                 href={link.href}
-                className={`relative text-sm font-semibold uppercase tracking-wider transition-all duration-300 ${
+                className={`relative text-[11px] font-black uppercase tracking-[0.2em] transition-all duration-300 ${
                   isActive
-                    ? "text-cyan-600"
-                    : "text-slate-700 hover:text-cyan-600"
+                    ? "text-cyan-400"
+                    : "text-white/60 hover:text-white"
                 }`}
               >
                 {link.name}
                 {isActive && (
-                  <span className="absolute -bottom-2 left-0 h-[2px] w-full rounded-full bg-cyan-500" />
+                  <motion.span
+                    layoutId="navbar-underline"
+                    className="absolute -bottom-2.5 left-0 h-[2px] w-full rounded-full bg-cyan-400 shadow-[0_0_8px_#22d3ee]"
+                  />
                 )}
               </Link>
             );
           })}
         </nav>
 
+        {/* DESKTOP ACTION BUTTON */}
         <a
           href="https://wa.me/916235106062"
           target="_blank"
-          className="hidden rounded-full bg-cyan-500 px-6 py-3 text-xs font-bold uppercase tracking-widest text-white transition-all duration-300 hover:bg-cyan-600 lg:inline-flex"
+          rel="noopener noreferrer"
+          className="hidden rounded-full border border-cyan-500/30 bg-cyan-500/10 px-6 py-3 text-[10px] font-black uppercase tracking-[0.25em] text-cyan-300 transition-all duration-300 hover:scale-105 hover:bg-cyan-500 hover:text-slate-950 lg:inline-flex"
         >
           Contact Now
         </a>
 
+        {/* MOBILE MENU TOGGLE BUTTON */}
         <button
           onClick={() => setIsOpen(true)}
-          className="flex h-11 w-11 items-center justify-center rounded-full border border-slate-200 bg-white shadow-sm lg:hidden"
+          className="flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/5 shadow-md lg:hidden"
         >
-          <Menu className="h-5 w-5 text-slate-900" />
+          <Menu className="h-5 w-5 text-white" />
         </button>
       </div>
 
-      {isOpen && (
-        <div className="fixed inset-0 z-[10000] bg-white lg:hidden">
-          <div className="flex h-full w-full flex-col bg-white px-5 py-4">
-            <div className="flex items-center justify-between border-b border-slate-200 pb-4">
+      {/* MOBILE SCREEN CURTAIN MENU */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: "-100%" }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: "-100%" }}
+            transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+            className="fixed inset-0 z-[100] bg-[#020b10]/95 backdrop-blur-3xl lg:hidden flex flex-col px-6 py-5"
+          >
+            <div className="flex items-center justify-between border-b border-white/5 pb-4">
               <Link
                 href="/"
                 onClick={() => setIsOpen(false)}
                 className="flex items-center gap-3"
               >
-                <div className="relative h-12 w-12 overflow-hidden rounded-full border border-cyan-200 bg-white shadow-sm">
+                <div className="relative h-12 w-12 overflow-hidden rounded-full border border-white/10 bg-white/5 shadow-md">
                   <Image
                     src="/logo.png"
                     alt="Dive Hub"
@@ -100,10 +117,10 @@ export default function Navbar() {
                 </div>
 
                 <div>
-                  <h2 className="text-sm font-black uppercase tracking-wide text-slate-900">
+                  <h2 className="text-xs font-black uppercase tracking-[0.2em] text-white">
                     Dive Hub
                   </h2>
-                  <p className="text-[9px] uppercase tracking-[0.2em] text-cyan-600">
+                  <p className="text-[8px] uppercase tracking-[0.25em] text-cyan-400">
                     Marine Services
                   </p>
                 </div>
@@ -111,13 +128,14 @@ export default function Navbar() {
 
               <button
                 onClick={() => setIsOpen(false)}
-                className="flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white shadow-sm"
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 shadow-md"
               >
-                <X className="h-5 w-5 text-slate-900" />
+                <X className="h-5 w-5 text-white" />
               </button>
             </div>
 
-            <div className="mt-8 flex flex-col gap-2">
+            {/* MOBILE NAV LINKS LIST */}
+            <div className="mt-12 flex flex-col gap-3">
               {navLinks.map((link) => {
                 const isActive = pathname === link.href;
 
@@ -126,16 +144,16 @@ export default function Navbar() {
                     key={link.name}
                     href={link.href}
                     onClick={() => setIsOpen(false)}
-                    className={`relative rounded-2xl px-4 py-4 text-sm font-bold uppercase tracking-widest transition-all duration-300 ${
+                    className={`relative rounded-2xl px-5 py-4 text-xs font-black uppercase tracking-[0.2em] transition-all duration-300 ${
                       isActive
-                        ? "bg-cyan-50 text-cyan-700"
-                        : "bg-white text-slate-700 hover:bg-slate-50"
+                        ? "bg-cyan-500/10 text-cyan-300 border border-cyan-500/20"
+                        : "bg-white/[0.02] text-white/70 hover:bg-white/5 border border-transparent"
                     }`}
                   >
                     <span className="relative inline-block">
                       {link.name}
                       {isActive && (
-                        <span className="absolute -bottom-1 left-0 h-[2px] w-full rounded-full bg-cyan-500" />
+                        <span className="absolute -bottom-1 left-0 h-[2px] w-full rounded-full bg-cyan-400" />
                       )}
                     </span>
                   </Link>
@@ -146,20 +164,22 @@ export default function Navbar() {
             <a
               href="https://wa.me/916235106062"
               target="_blank"
-              className="mt-8 inline-flex items-center justify-center rounded-full bg-cyan-500 px-6 py-4 text-sm font-bold uppercase tracking-widest text-white transition-all duration-300 hover:bg-cyan-600"
+              rel="noopener noreferrer"
+              onClick={() => setIsOpen(false)}
+              className="mt-8 inline-flex items-center justify-center gap-2 rounded-full bg-cyan-400 px-6 py-4 text-xs font-black uppercase tracking-[0.25em] text-slate-950 shadow-lg shadow-cyan-500/20"
             >
               Contact Now
+              <ArrowRight className="h-4 w-4" />
             </a>
 
-            <div className="mt-auto rounded-3xl border border-slate-200 bg-slate-50 p-5">
-              <p className="text-sm leading-relaxed text-slate-600">
-                Professional scuba diving training, underwater services,
-                commercial diving, and marine solutions.
+            <div className="mt-auto rounded-3xl border border-white/5 bg-white/[0.01] p-6 text-center">
+              <p className="text-xs leading-relaxed text-slate-400 font-light">
+                Professional scuba diving certification, specialized commercial diving education, ROV data surveys and offshore solutions.
               </p>
             </div>
-          </div>
-        </div>
-      )}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 }

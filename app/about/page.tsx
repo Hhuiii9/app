@@ -1,246 +1,586 @@
-// src/app/about/page.tsx
+"use client";
 
+import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
+import { motion, useScroll, useTransform, AnimatePresence, useInView } from "framer-motion";
 import {
   ShieldCheck,
-  Waves,
   Award,
-  Fish,
-  Anchor,
-  LifeBuoy,
+  Waves,
+  Compass,
+  ArrowRight,
+  ChevronDown,
+  Play,
+  VolumeX,
+  Volume2,
+  Calendar,
+  Sparkles,
 } from "lucide-react";
 
-const features = [
+// Timeline Data
+const timelineItems = [
+  {
+    year: "2015",
+    title: "Foundation",
+    desc: "Established Dive Hub with a vision to deliver world-class, safety-centric scuba training.",
+  },
+  {
+    year: "2017",
+    title: "Elite Training Academy",
+    desc: "Certified over 1,000 divers and expanded programs to include rescue and emergency training.",
+  },
+  {
+    year: "2019",
+    title: "Marine Expansion",
+    desc: "Launched our professional marine services division, offering underwater hull inspection and support.",
+  },
+  {
+    year: "2021",
+    title: "ROV Innovation",
+    desc: "Integrated state-of-the-art ROV deep-sea survey robotics for remote ocean floor exploration.",
+  },
+  {
+    year: "2026",
+    title: "Global Presence",
+    desc: "Partnering with international marine agencies to lead deep ocean exploration and conservation.",
+  },
+];
+
+// Core Values Data
+const values = [
   {
     icon: ShieldCheck,
     title: "Safety First",
-    desc: "Professional safety-focused diving practices for every session.",
+    desc: "Zero-compromise safety protocols using military-grade redundant systems and elite guides.",
   },
   {
     icon: Award,
-    title: "Certified Trainers",
-    desc: "Experienced and internationally trained instructors.",
+    title: "Excellence",
+    desc: "Striving for peak operational perfection in elite training, research, and technical services.",
   },
   {
     icon: Waves,
-    title: "Modern Equipment",
-    desc: "Advanced diving equipment and underwater technology.",
+    title: "Innovation",
+    desc: "Leveraging advanced sonar sensors, deep-water cameras, and robotics to map the unseen.",
   },
   {
-    icon: Fish,
-    title: "Marine Passion",
-    desc: "Strong focus on ocean exploration and conservation.",
+    icon: Compass,
+    title: "Exploration",
+    desc: "Championing deep curiosity, mapping submerged caverns, and safeguarding precious ecosystems.",
   },
 ];
 
-const stats = [
-  {
-    number: "500+",
-    label: "Certified Divers",
-  },
-  {
-    number: "10+",
-    label: "Years Experience",
-  },
-  {
-    number: "50+",
-    label: "Marine Projects",
-  },
-  {
-    number: "100%",
-    label: "Safety Focused",
-  },
-];
+// Individual Timeline Card Component
+const TimelineCard = ({ item, index }: { item: typeof timelineItems[0]; index: number }) => {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(cardRef, { once: true, margin: "-100px" });
+  const isEven = index % 2 === 0;
 
-const services = [
-  {
-    icon: Waves,
-    title: "Scuba Diving Courses",
-  },
-  {
-    icon: Anchor,
-    title: "Commercial Diving",
-  },
-  {
-    icon: LifeBuoy,
-    title: "Rescue Diving",
-  },
-  {
-    icon: Fish,
-    title: "Marine Exploration",
-  },
-];
+  return (
+    <div ref={cardRef} className="relative flex flex-col md:flex-row items-center justify-between w-full mb-16 md:mb-24">
+      {/* Space for Timeline line spacer */}
+      <div className="w-full md:w-5/12 hidden md:block" />
+
+      {/* Dynamic central node */}
+      <div className="absolute left-4 md:left-1/2 -translate-x-1/2 flex items-center justify-center z-10">
+        <motion.div
+          initial={{ scale: 0 }}
+          animate={isInView ? { scale: 1 } : { scale: 0 }}
+          transition={{ type: "spring", stiffness: 100, delay: 0.1 }}
+          className="h-8 w-8 rounded-full border-2 border-cyan-400 bg-[#03131d] shadow-[0_0_15px_#22d3ee] flex items-center justify-center"
+        >
+          <div className="h-2 w-2 rounded-full bg-cyan-400" />
+        </motion.div>
+      </div>
+
+      {/* Card Body */}
+      <motion.div
+        initial={{ opacity: 0, x: isEven ? 80 : -80, y: 30, filter: "blur(8px)" }}
+        animate={isInView ? { opacity: 1, x: 0, y: 0, filter: "blur(0px)" } : {}}
+        transition={{ type: "spring", stiffness: 50, damping: 15, duration: 0.8 }}
+        className={`w-full md:w-5/12 pl-12 md:pl-0 ${isEven ? "md:order-last" : "md:order-first md:text-right"}`}
+      >
+        <div className="group relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04] backdrop-blur-xl p-8 hover:border-cyan-400/30 hover:shadow-[0_15px_40px_rgba(6,182,212,0.15)] transition-all duration-500">
+          <div className={`flex items-center gap-3 mb-4 ${isEven ? "justify-start" : "justify-start md:justify-end"}`}>
+            <span className="text-xs font-black tracking-widest text-cyan-400 bg-cyan-950/40 px-3 py-1 rounded-full border border-cyan-400/20">
+              {item.year}
+            </span>
+            <Calendar className="h-4 w-4 text-cyan-400/60" />
+          </div>
+          <h3 className="text-2xl font-black uppercase tracking-wider text-white mb-3 group-hover:text-cyan-300 transition-colors duration-300">
+            {item.title}
+          </h3>
+          <p className="text-base text-slate-300 font-light leading-relaxed">
+            {item.desc}
+          </p>
+        </div>
+      </motion.div>
+    </div>
+  );
+};
+
+// Core Value Card Component
+const ValueCard = ({ item, index }: { item: typeof values[0]; index: number }) => {
+  const [mouseCoords, setMouseCoords] = useState({ x: 0, y: 0 });
+  const Icon = item.icon;
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    setMouseCoords({
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top,
+    });
+  };
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 60, scale: 0.94 }}
+      whileInView={{ opacity: 1, y: 0, scale: 1 }}
+      viewport={{ once: true, margin: "-100px" }}
+      transition={{ duration: 0.8, delay: index * 0.15, ease: "easeOut" }}
+      onMouseMove={handleMouseMove}
+      whileHover={{ y: -12, scale: 1.03 }}
+      className="group relative overflow-hidden rounded-[32px] border border-white/10 bg-white/[0.04] backdrop-blur-xl p-8 md:p-10 shadow-[0_24px_60px_rgba(0,0,0,0.5)] hover:border-cyan-400/30 hover:shadow-[0_20px_50px_rgba(6,182,212,0.15)] transition-all duration-500 cursor-pointer flex flex-col justify-between h-full"
+    >
+      <div
+        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-0"
+        style={{
+          background: `radial-gradient(350px circle at ${mouseCoords.x}px ${mouseCoords.y}px, rgba(34, 211, 238, 0.14), transparent 80%)`,
+        }}
+      />
+
+      <div className="relative z-10 flex flex-col gap-6">
+        {/* Glow Icon */}
+        <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white/10 border border-white/20 text-white transition-all duration-500 group-hover:scale-110 group-hover:bg-cyan-500/20 group-hover:border-cyan-400/40 group-hover:text-cyan-400">
+          <Icon className="h-7 w-7 transition-transform duration-700 group-hover:rotate-[360deg]" />
+        </div>
+
+        {/* Details */}
+        <div className="flex flex-col gap-3">
+          <h3 className="text-xl md:text-2xl font-black uppercase tracking-wider text-white">
+            {item.title}
+          </h3>
+          <p className="text-sm md:text-base text-slate-300 font-light leading-relaxed">
+            {item.desc}
+          </p>
+        </div>
+      </div>
+    </motion.div>
+  );
+};
 
 export default function AboutPage() {
+  const [muted, setMuted] = useState(true);
+  const heroRef = useRef<HTMLDivElement>(null);
+  const storyRef = useRef<HTMLDivElement>(null);
+  const timelineContainerRef = useRef<HTMLDivElement>(null);
+  const videoShowcaseRef = useRef<HTMLDivElement>(null);
+
+  const isHeroInView = useInView(heroRef, { once: false, amount: 0.1 });
+  const isStoryInView = useInView(storyRef, { once: true, margin: "-100px" });
+  const isVideoShowcaseInView = useInView(videoShowcaseRef, { once: false, amount: 0.1 });
+
+  const heroVideoRef = useRef<HTMLVideoElement>(null);
+  const showcaseVideoRef = useRef<HTMLVideoElement>(null);
+
+  // Scroll animations for parallax and timeline growth
+  const { scrollYProgress: timelineScroll } = useScroll({
+    target: timelineContainerRef,
+    offset: ["start end", "end start"],
+  });
+  const timelineScaleY = useTransform(timelineScroll, [0.15, 0.85], [0, 1]);
+
+  const { scrollYProgress: heroScroll } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"],
+  });
+  const heroVideoScale = useTransform(heroScroll, [0, 1], [1, 1.12]);
+  const heroTextY = useTransform(heroScroll, [0, 1], [0, 80]);
+  const heroTextOpacity = useTransform(heroScroll, [0, 0.7], [1, 0]);
+
+  // Handle playing/pausing of videos based on visibility
+  useEffect(() => {
+    const video = heroVideoRef.current;
+    if (video) {
+      if (isHeroInView) {
+        video.play().catch(() => {});
+      } else {
+        video.pause();
+      }
+    }
+  }, [isHeroInView]);
+
+  useEffect(() => {
+    const video = showcaseVideoRef.current;
+    if (video) {
+      if (isVideoShowcaseInView) {
+        video.play().catch(() => {});
+      } else {
+        video.pause();
+      }
+    }
+  }, [isVideoShowcaseInView]);
+
+  // Title Splitting for Apple-level blur reveal
+  const titleWords = "DISCOVER OUR STORY".split(" ");
+
+  // Particles for Hero
+  const particles = Array.from({ length: 24 });
+
   return (
-    <main className="bg-white text-slate-900">
-      
-      {/* HERO */}
-      <section className="relative overflow-hidden px-4 py-16 sm:px-6 sm:py-24 md:py-28">
-        <div className="mx-auto max-w-7xl">
-          <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
-            
-            {/* LEFT */}
-            <div>
-              <p className="mb-4 text-[10px] font-black uppercase tracking-[0.28em] text-cyan-600 sm:text-xs">
-                About Dive Hub
-              </p>
+    <main className="w-full bg-[#03131d] overflow-x-hidden text-white font-sans selection:bg-cyan-500/30">
 
-              <h1 className="text-[32px] font-black leading-[1.08] text-slate-950 sm:text-5xl md:text-6xl">
-                Professional Diving &
-                <span className="text-cyan-600">
-                  {" "}
-                  Marine Services
-                </span>
-              </h1>
+      {/* SECTION 1 — CINEMATIC HERO (100vh) */}
+      <section
+        ref={heroRef}
+        className="relative h-screen w-full flex items-center justify-center text-center overflow-hidden"
+      >
+        {/* Full-screen Background Video */}
+        <motion.div
+          style={{ scale: heroVideoScale }}
+          className="absolute inset-0 w-full h-full pointer-events-none z-0"
+        >
+          <video
+            ref={heroVideoRef}
+            src="/videos/about-bg.mp4"
+            muted={muted}
+            loop
+            playsInline
+            className="w-full h-full object-cover opacity-60"
+          >
+            <source src="/about-bg.mp4" type="video/mp4" />
+            <source src="/videos/ocean-bg.mp4" type="video/mp4" />
+            <source src="/ocean-bg1.mp4" type="video/mp4" />
+          </video>
+        </motion.div>
 
-              <p className="mt-5 max-w-2xl text-[14px] leading-7 text-slate-600 sm:mt-7 sm:text-[16px] sm:leading-8">
-                Dive Hub & Marine Services delivers professional
-                scuba diving training, underwater services,
-                commercial diving solutions, and unforgettable
-                marine exploration experiences.
-              </p>
+        {/* Cinematic dark theme overlay */}
+        <div
+          className="absolute inset-0 z-10 pointer-events-none"
+          style={{
+            background:
+              "linear-gradient(180deg, rgba(3, 19, 29, 0.45) 0%, rgba(3, 19, 29, 0.9) 100%)",
+          }}
+        />
 
-              <p className="mt-4 max-w-2xl text-[14px] leading-7 text-slate-500 sm:text-[16px] sm:leading-8">
-                Our mission is to create highly skilled divers
-                while maintaining international safety standards,
-                advanced underwater training, and responsible
-                marine practices.
-              </p>
+        {/* Ambient floating bio-particles */}
+        <div className="absolute inset-0 pointer-events-none z-10 overflow-hidden">
+          {isHeroInView &&
+            particles.map((_, i) => (
+              <motion.div
+                key={i}
+                initial={{
+                  x: `${Math.random() * 100}%`,
+                  y: "110dvh",
+                  opacity: Math.random() * 0.4 + 0.1,
+                  scale: Math.random() * 0.6 + 0.3,
+                }}
+                animate={{
+                  y: "-10dvh",
+                  x: [
+                    null,
+                    `${Math.random() * 16 - 8}%`,
+                    `${Math.random() * 16 - 8}%`,
+                  ],
+                }}
+                transition={{
+                  duration: Math.random() * 15 + 10,
+                  repeat: Infinity,
+                  ease: "linear",
+                  delay: Math.random() * 10,
+                }}
+                className="absolute w-2.5 h-2.5 rounded-full bg-cyan-400/20 blur-[1px]"
+              />
+            ))}
+        </div>
 
-              {/* SERVICES */}
-              <div className="mt-7 grid grid-cols-2 gap-3">
-                {services.map((item, index) => {
-                  const Icon = item.icon;
+        {/* Foreground Content */}
+        <motion.div
+          style={{ y: heroTextY, opacity: heroTextOpacity }}
+          className="relative z-20 max-w-4xl mx-auto px-6 flex flex-col gap-6 items-center"
+        >
+          <motion.span
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="text-xs font-black uppercase tracking-[0.45em] text-cyan-400 drop-shadow-[0_2px_10px_rgba(34,211,238,0.25)] flex items-center gap-2"
+          >
+            <Sparkles className="h-3.5 w-3.5" />
+            ABOUT US
+          </motion.span>
 
-                  return (
-                    <div
-                      key={index}
-                      className="flex items-center gap-2 rounded-2xl bg-cyan-50 p-3"
-                    >
-                      <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-white">
-                        <Icon className="h-4 w-4 text-cyan-600" />
-                      </div>
+          {/* Letter Reveal Stagger Title */}
+          <h1 className="text-5xl sm:text-7xl md:text-8xl font-black uppercase tracking-tight leading-none text-white drop-shadow-[0_12px_30px_rgba(0,0,0,0.85)] flex flex-wrap justify-center gap-x-4">
+            {titleWords.map((word, wIdx) => (
+              <motion.span
+                key={wIdx}
+                initial={{ opacity: 0, y: 40, filter: "blur(10px)" }}
+                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                transition={{
+                  duration: 0.9,
+                  delay: wIdx * 0.15,
+                  ease: [0.16, 1, 0.3, 1],
+                }}
+              >
+                {word}
+              </motion.span>
+            ))}
+          </h1>
 
-                      <p className="text-[11px] font-black uppercase tracking-wide text-slate-800">
-                        {item.title}
-                      </p>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
+          <motion.p
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.0, delay: 0.5, ease: "easeOut" }}
+            className="text-base sm:text-xl text-slate-200 font-light leading-relaxed max-w-2xl drop-shadow-[0_4px_8px_rgba(0,0,0,0.6)]"
+          >
+            Experience the world beneath the surface through premium training, exploration, and marine excellence.
+          </motion.p>
 
-            {/* IMAGE */}
-            <div className="relative">
-              <div className="absolute inset-0 rounded-[2rem] bg-cyan-100/60 blur-3xl" />
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1.0, delay: 0.75 }}
+            className="mt-10 flex flex-wrap gap-4 justify-center items-center"
+          >
+            <button
+              onClick={() => {
+                storyRef.current?.scrollIntoView({ behavior: "smooth" });
+              }}
+              className="group/btn inline-flex items-center gap-3 rounded-full border border-cyan-400/40 bg-cyan-950/20 px-8 py-4 text-xs font-black uppercase tracking-[0.25em] text-cyan-400 backdrop-blur-md transition-all duration-300 hover:bg-cyan-400 hover:text-[#03131d] shadow-[0_0_20px_rgba(34,211,238,0.25)] hover:shadow-[0_0_35px_rgba(34,211,238,0.5)]"
+            >
+              Explore Journey
+              <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover/btn:translate-x-1.5" />
+            </button>
+          </motion.div>
+        </motion.div>
 
-              <div className="relative overflow-hidden rounded-[2rem] bg-white shadow-[0_20px_60px_rgba(6,182,212,0.14)]">
-                <Image
-                  src="/images/about-diver1.jpg"
-                  alt="Diving Training"
-                  width={700}
-                  height={700}
-                  className="h-[300px] w-full object-cover sm:h-[420px] lg:h-[560px]"
-                />
-              </div>
-            </div>
-          </div>
+        {/* Video mute/unmute control */}
+        <button
+          onClick={() => setMuted(!muted)}
+          className="absolute bottom-10 right-10 z-30 flex h-12 w-12 items-center justify-center rounded-full border border-white/20 bg-black/35 text-white backdrop-blur-md hover:border-cyan-400/40 hover:text-cyan-400 hover:scale-110 transition-all duration-300 shadow-[0_4px_12px_rgba(0,0,0,0.3)]"
+          aria-label={muted ? "Unmute video" : "Mute video"}
+        >
+          {muted ? <VolumeX className="h-5 w-5" /> : <Volume2 className="h-5 w-5" />}
+        </button>
+
+        {/* Scroll Indicator */}
+        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2 pointer-events-none opacity-60">
+          <span className="text-[9px] font-black uppercase tracking-[0.3em] text-white/50">
+            SCROLL DOWN
+          </span>
+          <motion.div
+            animate={{ y: [0, 8, 0] }}
+            transition={{ duration: 1.5, repeat: Infinity }}
+          >
+            <ChevronDown className="h-4 w-4 text-white" />
+          </motion.div>
         </div>
       </section>
 
-      {/* STATS */}
-      <section className="px-4 pb-16 sm:px-6 sm:pb-24">
-        <div className="mx-auto max-w-7xl">
-          <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-5">
-            {stats.map((item, index) => (
-              <div
-                key={index}
-                className="rounded-2xl bg-cyan-50 p-5 text-center sm:rounded-[2rem] sm:p-8"
-              >
-                <h3 className="text-3xl font-black text-cyan-600 sm:text-5xl">
-                  {item.number}
-                </h3>
+      {/* SECTION 2 — OUR STORY (100vh) */}
+      <section
+        ref={storyRef}
+        className="relative min-h-screen md:h-screen w-full flex items-center justify-center bg-[#03131d] py-20 px-6 sm:px-12 z-20 overflow-hidden"
+      >
+        <div className="max-w-7xl w-full mx-auto grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-16 items-center">
+          
+          {/* Left Column: Shutter-reveal image */}
+          <div className="md:col-span-6 relative w-full h-[400px] md:h-[600px] rounded-[32px] overflow-hidden group">
+            {/* Shutter reveal layer */}
+            <motion.div
+              initial={{ x: "0%" }}
+              whileInView={{ x: "100%" }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 1.1, ease: [0.77, 0, 0.175, 1] }}
+              className="absolute inset-0 bg-cyan-400 z-10"
+            />
+            
+            <motion.div
+              initial={{ scale: 1.15 }}
+              whileInView={{ scale: 1 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 1.2, ease: "easeOut" }}
+              className="w-full h-full"
+            >
+              <Image
+                src="/images/about-diver1.jpg"
+                alt="Elite diver swimming in blue ocean"
+                fill
+                className="object-cover transition-transform duration-1000 group-hover:scale-105"
+                sizes="(max-w-768px) 100vw, 50vw"
+                priority
+              />
+            </motion.div>
+            
+            {/* Deep overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-[#03131d] via-[#03131d]/20 to-transparent z-5" />
+          </div>
 
-                <p className="mt-2 text-[11px] font-black uppercase tracking-[0.18em] text-slate-600 sm:text-xs">
-                  {item.label}
+          {/* Right Column: Premium glass storytelling card */}
+          <motion.div
+            initial={{ opacity: 0, y: 60 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.9, delay: 0.2 }}
+            className="md:col-span-6"
+          >
+            <div className="relative overflow-hidden rounded-[32px] border border-white/10 bg-white/[0.04] backdrop-blur-xl p-8 sm:p-12 shadow-[0_24px_80px_rgba(0,0,0,0.6)]">
+              <span className="text-xs font-black uppercase tracking-[0.4em] text-cyan-400 mb-4 block">
+                WHO WE ARE
+              </span>
+              <h2 className="text-4xl sm:text-5xl font-black uppercase tracking-tight text-white mb-6 leading-none">
+                OUR STORY
+              </h2>
+              <div className="flex flex-col gap-5 text-slate-300 font-light text-base leading-relaxed">
+                <p>
+                  Founded with an insatiable passion for deep marine ecosystems, Dive Hub merges high-end underwater engineering with tactical diving education. We exist to map the unexplored and support ocean professionals globally.
+                </p>
+                <p>
+                  Our curriculum combines rigorous military-level safety margins with highly artistic ocean photography and videography certifications. Every dive is an execution of discipline, technology, and pure marine awe.
                 </p>
               </div>
+
+              {/* Minimal stats block within story */}
+              <div className="grid grid-cols-3 gap-4 mt-8 pt-8 border-t border-white/10">
+                <div>
+                  <h4 className="text-2xl sm:text-3xl font-black text-cyan-400">10+</h4>
+                  <p className="text-[10px] font-black uppercase tracking-widest text-slate-400">YEARS</p>
+                </div>
+                <div>
+                  <h4 className="text-2xl sm:text-3xl font-black text-cyan-400">2K+</h4>
+                  <p className="text-[10px] font-black uppercase tracking-widest text-slate-400">DIVERS</p>
+                </div>
+                <div>
+                  <h4 className="text-2xl sm:text-3xl font-black text-cyan-400">99.9%</h4>
+                  <p className="text-[10px] font-black uppercase tracking-widest text-slate-400">SAFETY</p>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
+        </div>
+      </section>
+
+      {/* SECTION 3 — EXPERIENCE TIMELINE */}
+      <section
+        ref={timelineContainerRef}
+        className="relative w-full py-24 md:py-36 px-6 sm:px-12 bg-[#03131d] z-20 overflow-hidden"
+      >
+        <div className="max-w-4xl mx-auto text-center mb-20">
+          <span className="text-xs font-black uppercase tracking-[0.4em] text-cyan-400">
+            CHRONICLES
+          </span>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-black uppercase tracking-tight text-white mt-4 drop-shadow-[0_4px_10px_rgba(0,0,0,0.5)]">
+            JOURNEY TIMELINE
+          </h2>
+        </div>
+
+        {/* Timeline body */}
+        <div className="relative max-w-5xl mx-auto">
+          {/* Vertical central tracking line */}
+          <div className="absolute left-4 md:left-1/2 top-0 bottom-0 -translate-x-1/2 w-[2px] bg-white/10">
+            <motion.div
+              style={{ scaleY: timelineScaleY, originY: 0 }}
+              className="w-full h-full bg-cyan-400 shadow-[0_0_15px_#22d3ee] rounded-full"
+            />
+          </div>
+
+          {timelineItems.map((item, index) => (
+            <TimelineCard key={index} item={item} index={index} />
+          ))}
+        </div>
+      </section>
+
+      {/* SECTION 4 — OUR VALUES */}
+      <section className="relative w-full py-24 px-6 sm:px-12 bg-[#03131d] z-20 overflow-hidden border-t border-white/5">
+        <div className="max-w-7xl mx-auto">
+          
+          <div className="text-center max-w-3xl mx-auto mb-20">
+            <span className="text-xs font-black uppercase tracking-[0.45em] text-cyan-400">
+              GUIDING VALUES
+            </span>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black uppercase tracking-tight text-white mt-4">
+              CORE PRINCIPLES
+            </h2>
+            <p className="text-sm md:text-base text-slate-400 font-light mt-4 max-w-xl mx-auto">
+              Our culture builds upon technical excellence, strict tactical marine standards, and environmental stewardship.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            {values.map((item, index) => (
+              <ValueCard key={index} item={item} index={index} />
             ))}
           </div>
+
         </div>
       </section>
 
-      {/* FEATURES */}
-      <section className="px-4 pb-16 sm:px-6 sm:pb-24">
-        <div className="mx-auto max-w-7xl">
-          
-          <div className="mb-10 text-center sm:mb-14">
-            <p className="text-[10px] font-black uppercase tracking-[0.28em] text-cyan-600 sm:text-xs">
-              Why Choose Us
-            </p>
+     
 
-            <h2 className="mt-4 text-[30px] font-black text-slate-950 sm:text-5xl">
-              Trusted Marine Experts
-            </h2>
+      {/* SECTION 6 — CTA */}
+      <section className="relative w-full py-24 md:py-36 px-6 sm:px-12 bg-[#03131d] z-20 overflow-hidden border-t border-white/5">
+        
+        {/* Glowing Spotlight Overlay */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(34,211,238,0.06)_0%,transparent_70%)] pointer-events-none z-0" />
 
-            <p className="mx-auto mt-5 max-w-2xl text-[14px] leading-7 text-slate-600 sm:text-[16px] sm:leading-8">
-              We combine professional expertise, modern diving
-              technology, and safety-focused training to create
-              premium underwater experiences.
-            </p>
-          </div>
+        <div className="max-w-4xl mx-auto text-center relative z-10 flex flex-col gap-6 items-center">
+          <motion.span
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+            className="text-xs font-black uppercase tracking-[0.45em] text-cyan-400"
+          >
+            JOIN OUR SQUADRON
+          </motion.span>
 
-          <div className="grid grid-cols-2 gap-3 sm:gap-5 md:grid-cols-2 lg:grid-cols-4">
-            {features.map((item, index) => {
-              const Icon = item.icon;
+          <motion.h2
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.9, delay: 0.1 }}
+            className="text-4xl sm:text-6xl font-black uppercase tracking-tight text-white leading-none"
+          >
+            READY TO DIVE WITH US?
+          </motion.h2>
 
-              return (
-                <div
-                  key={index}
-                  className="rounded-2xl bg-white p-3 shadow-[0_10px_30px_rgba(6,182,212,0.08)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_50px_rgba(6,182,212,0.14)] sm:rounded-[2rem] sm:p-7"
-                >
-                  <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-cyan-50 sm:mb-5 sm:h-16 sm:w-16 sm:rounded-2xl">
-                    <Icon className="h-5 w-5 text-cyan-600 sm:h-7 sm:w-7" />
-                  </div>
+          <motion.p
+            initial={{ opacity: 0, y: 25 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.9, delay: 0.2 }}
+            className="text-base sm:text-lg text-slate-300 font-light max-w-xl leading-relaxed"
+          >
+            Connect with our expert academy, enroll in high-end certifications, or charter bespoke marine support solutions.
+          </motion.p>
 
-                  <h3 className="text-[13px] font-black leading-tight text-slate-950 sm:text-2xl">
-                    {item.title}
-                  </h3>
-
-                  <p className="mt-2 text-[11px] leading-5 text-slate-600 sm:mt-4 sm:text-[15px] sm:leading-7">
-                    {item.desc}
-                  </p>
-                </div>
-              );
-            })}
-          </div>
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1.0, delay: 0.35 }}
+            className="mt-8 flex flex-wrap gap-4 justify-center"
+          >
+            <Link
+              href="/courses"
+              className="group inline-flex items-center gap-3 rounded-full border border-cyan-400/40 bg-cyan-950/20 px-8 py-4 text-xs font-black uppercase tracking-[0.25em] text-cyan-400 backdrop-blur-md transition-all duration-300 hover:bg-cyan-400 hover:text-[#03131d] shadow-[0_0_20px_rgba(34,211,238,0.25)] hover:shadow-[0_0_35px_rgba(34,211,238,0.55)]"
+            >
+              Explore Courses
+              <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1.5" />
+            </Link>
+            
+            <Link
+              href="/contact"
+              className="group inline-flex items-center gap-3 rounded-full border border-white/20 bg-white/5 hover:bg-white/10 px-8 py-4 text-xs font-black uppercase tracking-[0.25em] text-white backdrop-blur-md transition-all duration-300"
+            >
+              Contact Us
+            </Link>
+          </motion.div>
         </div>
       </section>
 
-      {/* MISSION */}
-      <section className="bg-slate-950 px-4 py-16 text-white sm:px-6 sm:py-24">
-        <div className="mx-auto max-w-5xl text-center">
-          <p className="text-[10px] font-black uppercase tracking-[0.28em] text-cyan-400 sm:text-xs">
-            Our Mission
-          </p>
-
-          <h2 className="mt-4 text-[30px] font-black leading-[1.1] sm:text-5xl">
-            Building Skilled Divers With
-            <span className="text-cyan-400">
-              {" "}
-              Global Safety Standards
-            </span>
-          </h2>
-
-          <p className="mx-auto mt-6 max-w-3xl text-[14px] leading-7 text-slate-300 sm:text-[17px] sm:leading-8">
-            Dive Hub aims to provide high-quality underwater
-            education, marine support services, and professional
-            diving experiences through innovation, discipline,
-            safety awareness, and passion for the ocean.
-          </p>
-        </div>
-      </section>
     </main>
   );
 }

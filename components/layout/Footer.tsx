@@ -1,7 +1,8 @@
-// src/components/layout/Footer.tsx
+"use client";
 
 import Image from "next/image";
 import Link from "next/link";
+import { motion } from "framer-motion";
 import {
   Phone,
   Mail,
@@ -11,47 +12,30 @@ import {
 } from "lucide-react";
 
 const quickLinks = [
-  {
-    name: "Home",
-    href: "/",
-  },
-  {
-    name: "About",
-    href: "/about",
-  },
-  {
-    name: "What We Offer",
-    href: "/what-we-offer",
-  },
-  {
-    name: "Courses",
-    href: "/courses",
-  },
-  {
-    name: "Contact",
-    href: "/contact",
-  },
+  { name: "Home", href: "/" },
+  { name: "About", href: "/about" },
+  { name: "What We Offer", href: "/what-we-offer" },
+  { name: "Courses", href: "/courses" },
+  { name: "Contact", href: "/contact" },
 ];
 
 export default function Footer() {
   return (
-    <footer className="relative overflow-hidden border-t border-white/10 bg-slate-950 text-white">
+    <footer className="relative overflow-hidden border-t border-white/5 bg-[#03131d] text-white">
       
-      {/* BG GLOW */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom,rgba(6,182,212,0.12),transparent_40%)]" />
+      {/* Immersive bottom glow effect */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom,rgba(34,211,238,0.06),transparent_45%)] pointer-events-none" />
 
-      <div className="relative z-10 mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20">
+      <div className="relative z-10 mx-auto max-w-7xl px-6 py-16 sm:px-8 sm:py-24">
         
-        <div className="grid gap-12 lg:grid-cols-4">
+        <div className="grid gap-12 lg:grid-cols-4 items-start">
           
-          {/* COMPANY */}
-          <div className="lg:col-span-2">
+          {/* BRAND COLUMN */}
+          <div className="lg:col-span-2 flex flex-col items-start">
             
-            {/* LOGO */}
-            <div className="flex items-center gap-3 sm:gap-4">
-              
-              {/* LOGO IMAGE */}
-              <div className="relative h-14 w-14 overflow-hidden rounded-full border border-cyan-400/20 bg-white/5 sm:h-16 sm:w-16">
+            {/* Logo */}
+            <div className="flex items-center gap-4">
+              <div className="relative h-14 w-14 overflow-hidden rounded-full border border-white/10 bg-white/5 shadow-md">
                 <Image
                   src="/logo.png"
                   alt="Dive Hub Logo"
@@ -60,57 +44,53 @@ export default function Footer() {
                 />
               </div>
 
-              {/* TEXT */}
               <div>
-                <h2 className="text-xl font-black uppercase tracking-wide sm:text-2xl">
+                <h2 className="text-lg font-black uppercase tracking-[0.2em] text-white">
                   Dive Hub
                 </h2>
-
-                <p className="text-[10px] uppercase tracking-[0.25em] text-cyan-400 sm:text-sm">
+                <p className="text-[9px] uppercase tracking-[0.25em] text-cyan-400 font-medium mt-0.5">
                   Marine Services
                 </p>
               </div>
             </div>
 
-            {/* DESC */}
-            <p className="mt-6 max-w-xl text-[14px] leading-7 text-slate-400 sm:mt-8 sm:text-[15px] sm:leading-relaxed">
-              Dive Hub & Marine Services provides professional diving
-              training, underwater services, commercial diving support,
-              marine solutions, and advanced diving certifications with
-              a strong focus on safety and professionalism.
+            {/* Description narrative */}
+            <p className="mt-6 max-w-md text-xs sm:text-sm font-light leading-relaxed text-slate-400">
+              Dive Hub & Marine Services provides professional scuba certifications, certified commercial diving education, specialized robotic ROV surveys, and industrial marine construction support under supreme safety standards.
             </p>
 
-            {/* SOCIAL */}
-            <div className="mt-7 flex items-center gap-3 sm:mt-8 sm:gap-4">
-              
-              <a
+            {/* Social media list */}
+            <div className="mt-8 flex items-center gap-3">
+              <motion.a
+                whileHover={{ y: -3, scale: 1.05, borderColor: "rgba(34, 211, 238, 0.3)" }}
                 href="#"
-                className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 transition-all duration-300 hover:border-cyan-400/40 hover:bg-cyan-500/10 sm:h-12 sm:w-12"
+                className="flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/5 text-slate-300 transition-colors duration-300 hover:text-cyan-300"
               >
-                <Instagram className="h-4 w-4 text-cyan-400 sm:h-5 sm:w-5" />
-              </a>
+                <Instagram className="h-4.5 w-4.5" />
+              </motion.a>
 
-              <a
+              <motion.a
+                whileHover={{ y: -3, scale: 1.05, borderColor: "rgba(34, 211, 238, 0.3)" }}
                 href="#"
-                className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 transition-all duration-300 hover:border-cyan-400/40 hover:bg-cyan-500/10 sm:h-12 sm:w-12"
+                className="flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/5 text-slate-300 transition-colors duration-300 hover:text-cyan-300"
               >
-                <Facebook className="h-4 w-4 text-cyan-400 sm:h-5 sm:w-5" />
-              </a>
+                <Facebook className="h-4.5 w-4.5" />
+              </motion.a>
             </div>
           </div>
 
-          {/* QUICK LINKS */}
-          <div>
-            <h3 className="text-lg font-black uppercase sm:text-xl">
-              Quick Links
+          {/* QUICK LINKS COLUMN */}
+          <div className="flex flex-col items-start">
+            <h3 className="text-xs sm:text-sm font-black uppercase tracking-[0.2em] text-white">
+              Navigation
             </h3>
 
-            <div className="mt-6 flex flex-col gap-3 sm:mt-8 sm:gap-4">
+            <div className="mt-6 flex flex-col gap-3.5">
               {quickLinks.map((link) => (
                 <Link
                   key={link.name}
                   href={link.href}
-                  className="text-[14px] text-slate-400 transition-all duration-300 hover:text-cyan-400 sm:text-[15px]"
+                  className="text-xs sm:text-sm font-light text-slate-400 tracking-wider transition-colors duration-300 hover:text-cyan-300"
                 >
                   {link.name}
                 </Link>
@@ -118,63 +98,54 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* CONTACT */}
-          <div>
-            <h3 className="text-lg font-black uppercase sm:text-xl">
-              Contact Info
+          {/* CONTACT INFO COLUMN */}
+          <div className="flex flex-col items-start">
+            <h3 className="text-xs sm:text-sm font-black uppercase tracking-[0.2em] text-white">
+              Marine Base
             </h3>
 
-            <div className="mt-6 space-y-5 sm:mt-8 sm:space-y-6">
+            <div className="mt-6 space-y-6">
               
-              {/* PHONE */}
-              <div className="flex items-start gap-3 sm:gap-4">
-                
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-cyan-500/10 sm:h-12 sm:w-12 sm:rounded-2xl">
-                  <Phone className="h-4 w-4 text-cyan-400 sm:h-5 sm:w-5" />
+              {/* Phone contact */}
+              <div className="flex items-start gap-4">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-cyan-500/10 border border-cyan-400/20 text-cyan-300">
+                  <Phone className="h-4.5 w-4.5" />
                 </div>
-
                 <div>
-                  <p className="text-[10px] uppercase tracking-wider text-slate-500 sm:text-sm">
+                  <span className="text-[8px] uppercase tracking-widest text-slate-500">
                     Phone
-                  </p>
-
-                  <p className="mt-1 text-[14px] text-slate-300 sm:text-base">
+                  </span>
+                  <p className="mt-0.5 text-xs sm:text-sm font-bold text-slate-300">
                     +91 6235106062
                   </p>
                 </div>
               </div>
 
-              {/* EMAIL */}
-              <div className="flex items-start gap-3 sm:gap-4">
-                
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-cyan-500/10 sm:h-12 sm:w-12 sm:rounded-2xl">
-                  <Mail className="h-4 w-4 text-cyan-400 sm:h-5 sm:w-5" />
+              {/* Email contact */}
+              <div className="flex items-start gap-4">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-cyan-500/10 border border-cyan-400/20 text-cyan-300">
+                  <Mail className="h-4.5 w-4.5" />
                 </div>
-
-                <div>
-                  <p className="text-[10px] uppercase tracking-wider text-slate-500 sm:text-sm">
+                <div className="min-w-0">
+                  <span className="text-[8px] uppercase tracking-widest text-slate-500">
                     Email
-                  </p>
-
-                  <p className="mt-1 break-all text-[14px] text-slate-300 sm:text-base">
-                    Divehubmarineservices@gmail.com
+                  </span>
+                  <p className="mt-0.5 break-all text-xs sm:text-sm font-bold text-slate-300">
+                    divehub@gmail.com
                   </p>
                 </div>
               </div>
 
-              {/* LOCATION */}
-              <div className="flex items-start gap-3 sm:gap-4">
-                
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-cyan-500/10 sm:h-12 sm:w-12 sm:rounded-2xl">
-                  <MapPin className="h-4 w-4 text-cyan-400 sm:h-5 sm:w-5" />
+              {/* Location pin */}
+              <div className="flex items-start gap-4">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-cyan-500/10 border border-cyan-400/20 text-cyan-300">
+                  <MapPin className="h-4.5 w-4.5" />
                 </div>
-
                 <div>
-                  <p className="text-[10px] uppercase tracking-wider text-slate-500 sm:text-sm">
+                  <span className="text-[8px] uppercase tracking-widest text-slate-500">
                     Location
-                  </p>
-
-                  <p className="mt-1 text-[14px] text-slate-300 sm:text-base">
+                  </span>
+                  <p className="mt-0.5 text-xs sm:text-sm font-bold text-slate-300">
                     Ernakulam, Kerala
                   </p>
                 </div>
@@ -183,20 +154,15 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* BOTTOM */}
-        <div className="mt-12 border-t border-white/10 pt-6 sm:mt-16 sm:pt-8">
-          
-          <div className="flex flex-col items-center justify-between gap-3 text-center md:flex-row">
-            
-            <p className="text-[12px] text-slate-500 sm:text-sm">
-              © {new Date().getFullYear()} Dive Hub & Marine Services.
-              All Rights Reserved.
-            </p>
+        {/* BOTTOM ATTRIBUTIONS TRACK */}
+        <div className="mt-16 border-t border-white/5 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
+          <p className="text-[10px] sm:text-xs text-slate-500 font-light">
+            © {new Date().getFullYear()} Dive Hub & Marine Services. All Rights Reserved.
+          </p>
 
-            <p className="text-[12px] text-slate-500 sm:text-sm">
-              Designed with premium marine aesthetics.
-            </p>
-          </div>
+          <p className="text-[10px] sm:text-xs text-slate-500 font-light tracking-wide">
+            Designed with premium cinematic aesthetics.
+          </p>
         </div>
       </div>
     </footer>

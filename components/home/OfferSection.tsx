@@ -1,155 +1,235 @@
-// src/components/home/OfferSection.tsx
+"use client";
 
-import Link from "next/link";
-import {
-  Waves,
-  ShieldCheck,
-  Camera,
-  Anchor,
-  Fish,
-  Compass,
-  ArrowRight,
-} from "lucide-react";
+import React, { useEffect, useRef, useState } from "react";
+import { motion, useInView } from "framer-motion";
+import { ArrowRight } from "lucide-react";
 
-const offers = [
-  {
-    icon: Waves,
-    title: "Underwater Services",
-    desc: "Marine inspections and underwater operations.",
-  },
-  {
-    icon: ShieldCheck,
-    title: "Diving Courses",
-    desc: "Expert-led diving training with safety standards.",
-  },
-  {
-    icon: Fish,
-    title: "Scuba Experiences",
-    desc: "Guided scuba sessions for all skill levels.",
-  },
-  {
-    icon: Camera,
-    title: "Specialty Training",
-    desc: "Deep, night, rescue and photography training.",
-  },
-  {
-    icon: Anchor,
-    title: "Commercial Diving",
-    desc: "Career-focused training for offshore industries.",
-  },
-  {
-    icon: Compass,
-    title: "ROV Survey Support",
-    desc: "Marine survey and technical assistance.",
-  },
-];
+type Bubble = {
+  id: number;
+  left: string;
+  size: number;
+  delay: number;
+  duration: number;
+  opacity: number;
+};
 
 export default function OfferSection() {
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  const isInView = useInView(sectionRef, {
+    once: false,
+    amount: 0.25,
+  });
+
+  const [mounted, setMounted] = useState(false);
+  const [bubbles, setBubbles] = useState<Bubble[]>([]);
+
+  useEffect(() => {
+    setMounted(true);
+
+    setBubbles(
+      Array.from({ length: 22 }).map((_, i) => ({
+        id: i,
+        left: `${Math.random() * 100}%`,
+        size: Math.random() * 8 + 4,
+        delay: Math.random() * 8,
+        duration: Math.random() * 10 + 10,
+        opacity: Math.random() * 0.35 + 0.12,
+      }))
+    );
+  }, []);
+
   return (
-    <section className="relative overflow-hidden bg-white px-4 py-16 text-slate-900 sm:px-6 sm:py-24 md:py-28">
-      <div className="relative z-10 mx-auto max-w-7xl">
-        
-        {/* TOP */}
-        <div className="mb-9 flex flex-col gap-5 sm:mb-14 lg:flex-row lg:items-end lg:justify-between">
-          
-          <div>
-            <p className="text-[10px] font-black uppercase tracking-[0.28em] text-cyan-600 sm:text-xs">
-              What We Offer
-            </p>
+    <section
+      ref={sectionRef}
+      className="relative min-h-screen w-full overflow-hidden bg-[#03131d] px-6 text-white"
+    >
+      {/* Background Video */}
+      <motion.div
+        animate={{
+          scale: isInView ? 1.08 : 1,
+        }}
+        transition={{
+          duration: 18,
+          ease: "linear",
+          repeat: Infinity,
+          repeatType: "reverse",
+        }}
+        className="absolute inset-0 z-0 h-full w-full"
+      >
+        <video
+          src="/ocean-bg1.mp4"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          className="h-full w-full object-cover opacity-65"
+        />
+      </motion.div>
 
-            <h2 className="mt-4 max-w-3xl text-[30px] font-black leading-[1.08] text-slate-950 sm:text-5xl md:text-6xl">
-              Diving Training &
-              <span className="text-cyan-600">
-                {" "}
-                Marine Services
-              </span>
-            </h2>
-          </div>
+      {/* Dark Premium Overlay */}
+      <div className="absolute inset-0 z-10 bg-gradient-to-b from-[#03131d]/30 via-[#03131d]/65 to-[#03131d]" />
 
-          <Link
-            href="/what-we-offer"
-            className="
-              inline-flex
-              w-fit
-              items-center
-              gap-2
-              rounded-full
-              border
-              border-cyan-200
-              bg-cyan-50
-              px-5
-              py-3
-              text-[10px]
-              font-black
-              uppercase
-              tracking-[0.18em]
-              text-cyan-700
-              transition-all
-              duration-300
-              hover:bg-cyan-500
-              hover:text-white
-              sm:px-7
-              sm:py-4
-              sm:text-xs
-            "
-          >
-            View All Services
+      {/* Side Glow */}
+      <div className="absolute left-[-120px] top-1/3 z-10 h-[340px] w-[340px] rounded-full bg-cyan-400/20 blur-[120px]" />
+      <div className="absolute right-[-140px] bottom-1/4 z-10 h-[360px] w-[360px] rounded-full bg-blue-500/20 blur-[130px]" />
 
-            <ArrowRight className="h-4 w-4" />
-          </Link>
+      {/* Bubbles */}
+      {mounted && (
+        <div className="pointer-events-none absolute inset-0 z-10 overflow-hidden">
+          {bubbles.map((bubble) => (
+            <motion.span
+              key={bubble.id}
+              initial={{
+                y: "110vh",
+                opacity: 0,
+              }}
+              animate={
+                isInView
+                  ? {
+                      y: "-10vh",
+                      opacity: [0, bubble.opacity, 0],
+                    }
+                  : {
+                      y: "110vh",
+                      opacity: 0,
+                    }
+              }
+              transition={{
+                duration: bubble.duration,
+                delay: bubble.delay,
+                repeat: Infinity,
+                ease: "linear",
+              }}
+              style={{
+                left: bubble.left,
+                width: `${bubble.size}px`,
+                height: `${bubble.size}px`,
+              }}
+              className="absolute bottom-0 rounded-full bg-cyan-300/40 blur-[1px]"
+            />
+          ))}
         </div>
+      )}
 
-        {/* CARDS */}
-        <div className="grid grid-cols-2 gap-3 sm:gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {offers.map((item, index) => {
-            const Icon = item.icon;
+      {/* Content */}
+      <div className="relative z-20 mx-auto flex min-h-screen max-w-5xl flex-col items-center justify-center text-center">
+        <motion.span
+          initial={{
+            opacity: 0,
+            y: 30,
+            filter: "blur(8px)",
+          }}
+          animate={
+            isInView
+              ? {
+                  opacity: 1,
+                  y: 0,
+                  filter: "blur(0px)",
+                }
+              : {
+                  opacity: 0,
+                  y: 30,
+                  filter: "blur(8px)",
+                }
+          }
+          transition={{ duration: 0.8 }}
+          className="mb-6 text-xs font-black uppercase tracking-[0.45em] text-cyan-300"
+        >
+          Discover The Deep
+        </motion.span>
 
-            return (
-              <div
-                key={index}
-                className="
-                  group
-                  relative
-                  overflow-hidden
-                  rounded-2xl
-                  border
-                  border-cyan-100
-                  bg-white
-                  p-3
-                  shadow-[0_10px_30px_rgba(6,182,212,0.06)]
-                  transition-all
-                  duration-300
-                  hover:-translate-y-1
-                  hover:border-cyan-300
-                  hover:shadow-[0_20px_50px_rgba(6,182,212,0.12)]
-                  sm:rounded-[2rem]
-                  sm:p-7
-                "
-              >
-                {/* INSIDE CARD BLUE EFFECT */}
-                <div className="absolute inset-0 bg-gradient-to-br from-cyan-50/0 via-cyan-50/10 to-cyan-100/40 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+        <motion.h1
+          initial={{
+            opacity: 0,
+            y: 60,
+            scale: 0.95,
+            filter: "blur(14px)",
+          }}
+          animate={
+            isInView
+              ? {
+                  opacity: 1,
+                  y: 0,
+                  scale: 1,
+                  filter: "blur(0px)",
+                }
+              : {
+                  opacity: 0,
+                  y: 60,
+                  scale: 0.95,
+                  filter: "blur(14px)",
+                }
+          }
+          transition={{
+            duration: 1.1,
+            ease: [0.16, 1, 0.3, 1],
+          }}
+          className="text-5xl font-black uppercase leading-none tracking-tight sm:text-7xl md:text-8xl lg:text-9xl"
+        >
+          What We Offer
+        </motion.h1>
 
-                <div className="relative z-10">
-                  
-                  {/* ICON */}
-                  <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-cyan-50 sm:mb-5 sm:h-16 sm:w-16 sm:rounded-2xl">
-                    <Icon className="h-5 w-5 text-cyan-600 sm:h-7 sm:w-7" />
-                  </div>
+        <motion.p
+          initial={{
+            opacity: 0,
+            y: 35,
+            filter: "blur(8px)",
+          }}
+          animate={
+            isInView
+              ? {
+                  opacity: 1,
+                  y: 0,
+                  filter: "blur(0px)",
+                }
+              : {
+                  opacity: 0,
+                  y: 35,
+                  filter: "blur(8px)",
+                }
+          }
+          transition={{
+            duration: 1,
+            delay: 0.18,
+          }}
+          className="mt-8 max-w-2xl text-base font-light leading-relaxed text-slate-200 sm:text-xl"
+        >
+          Premium underwater services, diving experiences, and marine solutions
+          crafted for unforgettable ocean adventures.
+        </motion.p>
 
-                  {/* TITLE */}
-                  <h3 className="text-[13px] font-black leading-tight text-slate-950 sm:text-2xl">
-                    {item.title}
-                  </h3>
-
-                  {/* DESCRIPTION */}
-                  <p className="mt-2 text-[11px] leading-5 text-slate-600 sm:mt-4 sm:text-[15px] sm:leading-7">
-                    {item.desc}
-                  </p>
-                </div>
-              </div>
-            );
-          })}
-        </div>
+        <motion.div
+          initial={{
+            opacity: 0,
+            y: 25,
+            scale: 0.9,
+          }}
+          animate={
+            isInView
+              ? {
+                  opacity: 1,
+                  y: 0,
+                  scale: 1,
+                }
+              : {
+                  opacity: 0,
+                  y: 25,
+                  scale: 0.9,
+                }
+          }
+          transition={{
+            duration: 0.9,
+            delay: 0.35,
+          }}
+          className="mt-10"
+        >
+          <button className="group inline-flex items-center gap-3 rounded-full border border-cyan-300/40 bg-cyan-950/25 px-8 py-4 text-xs font-black uppercase tracking-[0.25em] text-cyan-300 backdrop-blur-xl transition-all duration-300 hover:bg-cyan-300 hover:text-[#03131d] hover:shadow-[0_0_35px_rgba(103,232,249,0.55)]">
+            Explore Services
+            <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-2" />
+          </button>
+        </motion.div>
       </div>
     </section>
   );
