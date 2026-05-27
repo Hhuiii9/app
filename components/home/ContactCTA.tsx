@@ -120,7 +120,7 @@ export default function ContactCTA() {
 
               {/* DYNAMIC MAP */}
               <iframe
-                src="https://maps.google.com/maps?q=Kerala&t=&z=10&ie=UTF8&iwloc=&output=embed"
+                src="https://www.google.com/maps?q=10.183175086975098,76.37934875488281&z=17&hl=en&output=embed"
                 className="h-[280px] w-full sm:h-[350px] border-none brightness-[0.8] contrast-[1.1] grayscale-[30%] invert-[90%]"
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"

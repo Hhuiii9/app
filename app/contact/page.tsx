@@ -332,7 +332,7 @@ ${message}`;
               </div>
 
               <iframe
-                src="https://maps.google.com/maps?q=Kerala&t=&z=10&ie=UTF8&iwloc=&output=embed"
+                src="https://www.google.com/maps?q=10.183175086975098,76.37934875488281&z=17&hl=en&output=embed"
                 className="h-[350px] w-full sm:h-[620px] opacity-80"
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
