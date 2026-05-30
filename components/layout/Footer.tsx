@@ -116,7 +116,7 @@ export default function Footer() {
                     Phone
                   </span>
                   <p className="mt-0.5 text-xs sm:text-sm font-bold text-slate-300">
-                    +91 6235106062
+                    0484 2989390
                   </p>
                 </div>
               </div>
@@ -137,19 +137,24 @@ export default function Footer() {
               </div>
 
               {/* Location pin */}
-              <div className="flex items-start gap-4">
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-cyan-500/10 border border-cyan-400/20 text-cyan-300">
+              <a
+                href="https://www.google.com/maps/place/10%C2%B010'59.4%22N+76%C2%B022'45.7%22E/@10.183175,76.379349,17z/data=!4m4!3m3!8m2!3d10.1831751!4d76.3793488?hl=en&entry=ttu"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-start gap-4 hover:opacity-85 transition-opacity"
+              >
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-cyan-500/10 border border-cyan-400/20 text-cyan-300 group-hover:border-cyan-300">
                   <MapPin className="h-4.5 w-4.5" />
                 </div>
                 <div>
                   <span className="text-[8px] uppercase tracking-widest text-slate-500">
                     Location
                   </span>
-                  <p className="mt-0.5 text-xs sm:text-sm font-bold text-slate-300">
-                    Ernakulam, Kerala
+                  <p className="mt-0.5 text-xs sm:text-sm font-bold text-slate-300 group-hover:text-cyan-300 transition-colors">
+                    Eloor, Ernakulam, Kerala
                   </p>
                 </div>
-              </div>
+              </a>
             </div>
           </div>
         </div>

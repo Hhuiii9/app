@@ -126,7 +126,7 @@ export default function ContactPage() {
                 </h3>
 
                 <p className="mt-2 text-[11px] leading-5 text-white/72 font-light sm:mt-4 sm:text-[15px] sm:leading-7">
-                  +91 6235106062
+                  0484 2989390
                 </p>
               </div>
             </motion.div>
@@ -153,25 +153,33 @@ export default function ContactPage() {
             </motion.div>
 
             {/* LOCATION */}
-            <motion.div
-              variants={fadeInUp}
-              whileHover={{ y: -6, scale: 1.02 }}
-              className="group rounded-2xl bg-white/[0.06] border border-white/10 hover:border-cyan-500/30 p-4 shadow-[0_15px_35px_rgba(0,0,0,0.3)] hover:shadow-[0_20px_50px_rgba(6,182,212,0.12)] cursor-pointer flex flex-col justify-between h-full transition-all duration-500 sm:rounded-[2rem] sm:p-7"
+            <a
+              href="https://www.google.com/maps/place/10%C2%B010'59.4%22N+76%C2%B022'45.7%22E/@10.183175,76.379349,17z/data=!4m4!3m3!8m2!3d10.1831751!4d76.3793488?hl=en&entry=ttu"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block h-full"
             >
-              <div>
-                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#0a2b40]/60 border border-[#123b57]/80 text-[#67e8f9] sm:h-16 sm:w-16 sm:rounded-2xl transition-all duration-300 group-hover:scale-105 group-hover:bg-[#123b57] group-hover:text-white">
-                  <MapPin className="h-5 w-5 sm:h-7 sm:w-7 transition-transform duration-700 group-hover:rotate-6" />
+              <motion.div
+                variants={fadeInUp}
+                whileHover={{ y: -6, scale: 1.02 }}
+                className="group rounded-2xl bg-white/[0.06] border border-white/10 hover:border-cyan-500/30 p-4 shadow-[0_15px_35px_rgba(0,0,0,0.3)] hover:shadow-[0_20px_50px_rgba(6,182,212,0.12)] cursor-pointer flex flex-col justify-between h-full transition-all duration-500 sm:rounded-[2rem] sm:p-7"
+              >
+                <div>
+                  <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#0a2b40]/60 border border-[#123b57]/80 text-[#67e8f9] sm:h-16 sm:w-16 sm:rounded-2xl transition-all duration-300 group-hover:scale-105 group-hover:bg-[#123b57] group-hover:text-white">
+                    <MapPin className="h-5 w-5 sm:h-7 sm:w-7 transition-transform duration-700 group-hover:rotate-6" />
+                  </div>
+
+                  <h3 className="mt-4 text-[13px] font-black text-white sm:mt-6 sm:text-2xl tracking-tight uppercase group-hover:text-[#67e8f9] transition-colors duration-300">
+                    Location
+                  </h3>
+
+                  <p className="mt-2 text-[11px] leading-5 text-white/72 font-light sm:mt-4 sm:text-[15px] sm:leading-7">
+                    Eloor, Ernakulam<br />
+                    Kerala, India
+                  </p>
                 </div>
-
-                <h3 className="mt-4 text-[13px] font-black text-white sm:mt-6 sm:text-2xl tracking-tight uppercase group-hover:text-[#67e8f9] transition-colors duration-300">
-                  Location
-                </h3>
-
-                <p className="mt-2 text-[11px] leading-5 text-white/72 font-light sm:mt-4 sm:text-[15px] sm:leading-7">
-                  Kerala, India
-                </p>
-              </div>
-            </motion.div>
+              </motion.div>
+            </a>
 
             {/* HOURS */}
             <motion.div
@@ -264,7 +272,7 @@ Phone: ${phone}
 Message:
 ${message}`;
 
-                    const whatsappUrl = `https://wa.me/916235106062?text=${encodeURIComponent(
+                    const whatsappUrl = `https://wa.me/916235107072?text=${encodeURIComponent(
                       whatsappMessage
                     )}`;
 
@@ -332,7 +340,7 @@ ${message}`;
               </div>
 
               <iframe
-                src="https://www.google.com/maps?q=10.183175086975098,76.37934875488281&z=17&hl=en&output=embed"
+                src="https://maps.google.com/maps?q=10.1831751,76.3793488&z=17&hl=en&output=embed"
                 className="h-[350px] w-full sm:h-[620px] opacity-80"
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"

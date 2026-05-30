@@ -74,7 +74,7 @@ export default function Navbar() {
 
         {/* DESKTOP ACTION BUTTON */}
         <a
-          href="https://wa.me/916235106062"
+          href="https://wa.me/916235107072"
           target="_blank"
           rel="noopener noreferrer"
           className="hidden rounded-full border border-cyan-500/30 bg-cyan-500/10 px-6 py-3 text-[10px] font-black uppercase tracking-[0.25em] text-cyan-300 transition-all duration-300 hover:scale-105 hover:bg-cyan-500 hover:text-slate-950 lg:inline-flex"
@@ -162,7 +162,7 @@ export default function Navbar() {
             </div>
 
             <a
-              href="https://wa.me/916235106062"
+              href="https://wa.me/916235107072"
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setIsOpen(false)}

@@ -59,7 +59,7 @@ export default function ContactCTA() {
                       Direct Line
                     </span>
                     <p className="mt-0.5 text-xs sm:text-sm font-black text-white">
-                      +91 6235106062
+                      0484 2989390
                     </p>
                   </div>
                 </motion.div>
@@ -88,7 +88,7 @@ export default function ContactCTA() {
               <div className="mt-8 flex flex-col sm:flex-row gap-4 w-full">
                 
                 <a
-                  href="https://wa.me/916235106062"
+                  href="https://wa.me/916235107072"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full bg-cyan-400 px-8 py-4 text-xs font-black uppercase tracking-[0.2em] text-[#03131d] shadow-[0_4px_25px_rgba(34,211,238,0.25)] transition-all duration-300 hover:scale-105 hover:bg-cyan-300 hover:shadow-[0_10px_40px_rgba(34,211,238,0.45)] w-full sm:w-auto"
@@ -120,7 +120,7 @@ export default function ContactCTA() {
 
               {/* DYNAMIC MAP */}
               <iframe
-                src="https://www.google.com/maps?q=10.183175086975098,76.37934875488281&z=17&hl=en&output=embed"
+                src="https://maps.google.com/maps?q=10.1831751,76.3793488&z=17&hl=en&output=embed"
                 className="h-[280px] w-full sm:h-[350px] border-none brightness-[0.8] contrast-[1.1] grayscale-[30%] invert-[90%]"
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
