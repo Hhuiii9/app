@@ -74,7 +74,7 @@ export default function ContactPage() {
             className="text-[10px] font-black uppercase tracking-[0.28em] text-[#67e8f9] sm:text-xs flex items-center justify-center gap-1.5"
           >
             <Sparkles className="h-3.5 w-3.5" />
-            Contact Dive Hub
+            Contact Dive Hub & Marine Services
           </motion.p>
 
           <motion.h1

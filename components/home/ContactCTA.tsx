@@ -28,7 +28,7 @@ export default function ContactCTA() {
             {/* LEFT DETAILS COLUMN */}
             <div className="flex flex-col items-start text-left">
               <span className="text-[10px] font-black uppercase tracking-[0.3em] text-cyan-400">
-                Contact Dive Hub
+                Contact Dive Hub & Marine Services
               </span>
 
               <h2 className="mt-5 text-4xl sm:text-5xl md:text-6xl font-black uppercase tracking-tight leading-[0.95] text-white">

@@ -47,7 +47,7 @@ export default function AboutPreview() {
           className="flex flex-col items-start order-2 lg:order-1"
         >
           <span className="text-[10px] font-black uppercase tracking-[0.3em] text-cyan-400">
-            About Dive Hub
+            About Dive Hub & Marine Services
           </span>
 
           <h2 className="mt-4 text-3xl sm:text-5xl md:text-6xl font-black uppercase tracking-tight leading-[0.98] text-white">

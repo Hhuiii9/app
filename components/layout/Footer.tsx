@@ -38,7 +38,7 @@ export default function Footer() {
               <div className="relative h-14 w-14 overflow-hidden rounded-full border border-white/10 bg-white/5 shadow-md">
                 <Image
                   src="/logo.png"
-                  alt="Dive Hub Logo"
+                  alt="Dive Hub & Marine Services Logo"
                   fill
                   className="object-cover"
                 />
@@ -46,7 +46,7 @@ export default function Footer() {
 
               <div>
                 <h2 className="text-lg font-black uppercase tracking-[0.2em] text-white">
-                  Dive Hub
+                  Dive Hub &
                 </h2>
                 <p className="text-[9px] uppercase tracking-[0.25em] text-cyan-400 font-medium mt-0.5">
                   Marine Services

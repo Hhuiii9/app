@@ -23,7 +23,7 @@ const timelineItems = [
   {
     year: "2015",
     title: "Foundation",
-    desc: "Established Dive Hub with a vision to deliver world-class, safety-centric scuba training.",
+    desc: "Established Dive Hub & Marine Services with a vision to deliver world-class, safety-centric scuba training.",
   },
   {
     year: "2017",
@@ -434,7 +434,7 @@ export default function AboutPage() {
               </h2>
               <div className="flex flex-col gap-5 text-slate-300 font-light text-base leading-relaxed">
                 <p>
-                  Founded with an insatiable passion for deep marine ecosystems, Dive Hub merges high-end underwater engineering with tactical diving education. We exist to map the unexplored and support ocean professionals globally.
+                  Founded with an insatiable passion for deep marine ecosystems, Dive Hub & Marine Services merges high-end underwater engineering with tactical diving education. We exist to map the unexplored and support ocean professionals globally.
                 </p>
                 <p>
                   Our curriculum combines rigorous military-level safety margins with highly artistic ocean photography and videography certifications. Every dive is an execution of discipline, technology, and pure marine awe.

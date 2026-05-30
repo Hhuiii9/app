@@ -37,7 +37,7 @@ export default function Navbar() {
 
           <div>
             <h1 className="text-xs sm:text-sm font-black uppercase tracking-[0.2em] text-white group-hover:text-cyan-300 transition-colors duration-300">
-              Dive Hub
+              Dive Hub &
             </h1>
             <p className="text-[8px] sm:text-[9px] uppercase tracking-[0.25em] text-cyan-400 font-medium mt-0.5">
               Marine Services
@@ -110,7 +110,7 @@ export default function Navbar() {
                 <div className="relative h-12 w-12 overflow-hidden rounded-full border border-white/10 bg-white/5 shadow-md">
                   <Image
                     src="/logo.png"
-                    alt="Dive Hub"
+                    alt="Dive Hub & Marine Services"
                     fill
                     className="object-cover"
                   />
@@ -118,7 +118,7 @@ export default function Navbar() {
 
                 <div>
                   <h2 className="text-xs font-black uppercase tracking-[0.2em] text-white">
-                    Dive Hub
+                    Dive Hub &
                   </h2>
                   <p className="text-[8px] uppercase tracking-[0.25em] text-cyan-400">
                     Marine Services

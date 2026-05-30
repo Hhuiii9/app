@@ -1,65 +1,83 @@
 "use client";
 
 import Image from "next/image";
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   Waves,
   ShieldCheck,
-  Camera,
   Anchor,
   LifeBuoy,
   BadgeCheck,
   ArrowRight,
+  HardHat
 } from "lucide-react";
 
-const whatsappNumber = "916235106062";
+const WHATSAPP_NUMBER = "916235106062";
 
-const courses = [
+interface Course {
+  category: "scuba" | "commercial";
+  icon: React.ComponentType<{ className?: string }>;
+  title: string;
+  desc: string;
+  image: string;
+}
+
+const courses: Course[] = [
+  // Scuba Diving Courses
   {
+    category: "scuba",
     icon: Waves,
-    title: "Beginner Diving",
-    desc: "Learn scuba diving fundamentals with safety-focused training.",
+    title: "Open Water Diver",
+    desc: "The essential entry-level global certification to start your underwater journey.",
     image: "/images/course-1.jpg",
   },
   {
+    category: "scuba",
     icon: ShieldCheck,
-    title: "Advanced Diving",
-    desc: "Advanced underwater techniques and deep diving sessions.",
+    title: "Advanced Open Water",
+    desc: "Deepen your experience with navigation, deep diving, and advanced control.",
     image: "/images/course-2.jpg",
   },
   {
-    icon: Camera,
-    title: "Underwater Photography",
-    desc: "Capture underwater moments using professional techniques.",
-    image: "/images/course-3.jpg",
-  },
-  {
+    category: "scuba",
     icon: LifeBuoy,
-    title: "Rescue Diving",
-    desc: "Emergency response and underwater rescue training programs.",
+    title: "Rescue Diver",
+    desc: "Learn to manage diving emergencies and become a highly capable dive partner.",
     image: "/images/course-4.jpg",
   },
   {
+    category: "scuba",
+    icon: BadgeCheck,
+    title: "Dive Master",
+    desc: "Take the step into professional diving, lead groups, and manage dive operations.",
+    image: "/images/course-6.jpg",
+  },
+  
+  // Commercial Diving Courses - Encompassing All Underwater Works
+  {
+    category: "commercial",
     icon: Anchor,
     title: "Commercial Diving",
-    desc: "Career-focused industrial and offshore diving training.",
+    desc: "Career-focused industrial and offshore surface-supplied diving training covering all underwater works, structural salvage, cutting, welding, and marine infrastructure engineering.",
     image: "/images/course-5.jpg",
   },
   {
+    category: "commercial",
     icon: BadgeCheck,
-    title: "Marine Inspection",
-    desc: "Professional underwater inspection and marine operations.",
-    image: "/images/course-6.jpg",
+    title: "Marine Inspection & Survey",
+    desc: "Professional non-destructive testing (NDT), structural integrity assessments, surveying, and comprehensive engineering data recording across all underwater works.",
+    image: "/images/course-3.jpg",
   },
+  {
+    category: "commercial",
+    icon: HardHat,
+    title: "All Underwater Works",
+    desc: "Comprehensive training in marine construction, subsea engineering, and hyperbaric operations, covering everything from civil concrete placement to deep-sea technical diving.",
+    image: "/images/course-7.jpg",
+  }
 ];
 
-const stats = [
-  { number: "500+", label: "Students Trained" },
-  { number: "25+", label: "Professional Courses" },
-  { number: "10+", label: "Years Experience" },
-  { number: "100%", label: "Safety Focused" },
-];
 
 // Premium animation configs
 const pageTransition = {
@@ -80,16 +98,12 @@ const fadeInUp = {
   },
 };
 
-const scaleIn = {
-  hidden: { opacity: 0, scale: 0.94 },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    transition: { duration: 0.7, ease: "easeOut" as const },
-  },
-};
-
 export default function CoursesPage() {
+  const [activeTab, setActiveTab] = useState<"scuba" | "commercial">("scuba");
+
+  // Filters the array instantly based on the active button
+  const filteredCourses = courses.filter((course) => course.category === activeTab);
+
   return (
     <motion.main
       initial="hidden"
@@ -115,8 +129,7 @@ export default function CoursesPage() {
             variants={fadeInUp}
             className="mx-auto mt-4 max-w-5xl text-[32px] font-black leading-[1.08] text-white sm:text-5xl md:text-6xl tracking-tight"
           >
-            Explore Our
-            <span className="text-[#67e8f9]"> Diving Programs</span>
+            Explore Our <span className="text-[#67e8f9]">Diving Programs</span>
           </motion.h1>
 
           <motion.p
@@ -124,45 +137,52 @@ export default function CoursesPage() {
             className="mx-auto mt-5 max-w-3xl text-[14px] leading-7 text-white/75 font-light sm:mt-7 sm:text-[16px] sm:leading-8"
           >
             Dive Hub & Marine Services offers beginner to advanced scuba diving
-            programs, commercial diving training, underwater rescue, and
-            professional marine certification courses with global safety
-            standards.
+            programs, commercial diving training for all underwater works, industrial 
+            rescue, and professional marine certification courses with global safety standards.
           </motion.p>
         </div>
       </section>
 
-      {/* STATS */}
-      <section className="px-4 pb-16 sm:px-6 sm:pb-24 relative z-10">
-        <div className="mx-auto max-w-7xl">
-          <motion.div
-            variants={{
-              hidden: {},
-              visible: { transition: { staggerChildren: 0.08 } }
-            }}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            className="grid grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-5"
-          >
-            {stats.map((item, index) => (
-              <motion.div
-                key={index}
-                variants={fadeInUp}
-                whileHover={{ y: -5, scale: 1.02 }}
-                className="rounded-2xl bg-white/[0.03] hover:bg-[#062232]/50 p-5 text-center border border-white/[0.08] hover:border-cyan-500/20 shadow-[0_10px_30px_rgba(0,0,0,0.2)] hover:shadow-[0_15px_35px_rgba(6,182,212,0.08)] cursor-pointer transition-all duration-300 sm:rounded-[2rem] sm:p-8"
-              >
-                <h3 className="text-3xl font-black text-[#67e8f9] sm:text-5xl tracking-tight">
-                  {item.number}
-                </h3>
+      {/* TWO-BUTTON CATEGORY NAVIGATION */}
+      <section className="px-4 pb-12 sm:px-6 relative z-20">
+        <div className="max-w-md mx-auto">
+          <div className="relative grid grid-cols-2 p-1.5 bg-[#062232]/60 backdrop-blur-xl border border-white/[0.08] rounded-full shadow-[0_15px_35px_rgba(0,0,0,0.4)]">
+            {/* Animated Background Slider */}
+            <motion.div
+              className="absolute inset-y-1.5 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 shadow-[0_0_20px_rgba(6,182,212,0.35)]"
+              initial={false}
+              animate={{
+                left: activeTab === "scuba" ? "6px" : "50%",
+                right: activeTab === "scuba" ? "50%" : "6px",
+              }}
+              transition={{ type: "spring", stiffness: 320, damping: 28 }}
+            />
 
-                <p className="mt-2 text-[11px] font-black uppercase tracking-[0.18em] text-white/60 sm:text-xs">
-                  {item.label}
-                </p>
-              </motion.div>
-            ))}
-          </motion.div>
+            {/* Scuba Diving Tab */}
+            <button
+              onClick={() => setActiveTab("scuba")}
+              className={`relative z-10 flex items-center justify-center gap-2 py-3.5 text-xs font-black uppercase tracking-[0.15em] transition-colors duration-300 rounded-full sm:text-sm ${
+                activeTab === "scuba" ? "text-slate-950" : "text-white/70 hover:text-white"
+              }`}
+            >
+              <Waves className={`h-4 w-4 ${activeTab === "scuba" ? "text-slate-950" : "text-[#67e8f9]"}`} />
+              Scuba Diving
+            </button>
+
+            {/* Commercial Diving Tab */}
+            <button
+              onClick={() => setActiveTab("commercial")}
+              className={`relative z-10 flex items-center justify-center gap-2 py-3.5 text-xs font-black uppercase tracking-[0.15em] transition-colors duration-300 rounded-full sm:text-sm ${
+                activeTab === "commercial" ? "text-slate-950" : "text-white/70 hover:text-white"
+              }`}
+            >
+              <Anchor className={`h-4 w-4 ${activeTab === "commercial" ? "text-slate-950" : "text-[#67e8f9]"}`} />
+              Commercial Diving
+            </button>
+          </div>
         </div>
       </section>
+
 
       {/* COURSES SECTION */}
       <section className="px-4 pb-16 sm:px-6 sm:pb-24 relative z-10">
@@ -175,78 +195,74 @@ export default function CoursesPage() {
             className="mb-10 text-center sm:mb-14"
           >
             <p className="text-[10px] font-black uppercase tracking-[0.28em] text-[#67e8f9] sm:text-xs">
-              Our Courses
+              Our Syllabus
             </p>
-
             <h2 className="mt-4 text-[30px] font-black text-white sm:text-5xl tracking-tight uppercase">
-              Learn From Experts
+              {activeTab === "scuba" ? "Scuba Training tracks" : "Industrial Programs"}
             </h2>
           </motion.div>
 
-          <motion.div
-            variants={{
-              hidden: {},
-              visible: { transition: { staggerChildren: 0.08 } }
-            }}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            className="grid grid-cols-2 gap-3 sm:gap-5 md:grid-cols-2 lg:grid-cols-3"
+          {/* Grid layout that manages child layouts beautifully during state toggles */}
+          <motion.div 
+            layout="position"
+            className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 sm:gap-5 min-h-[400px]"
           >
-            {courses.map((course, index) => {
-              const Icon = course.icon;
-              const message = `Hello Dive Hub & Marine Services, I want to enroll in the ${course.title} course. Please share more details.`;
+            <AnimatePresence mode="popLayout">
+              {filteredCourses.map((course) => {
+                const Icon = course.icon;
+                const message = `Hello Dive Hub & Marine Services, I want to enroll in the ${course.title} course. Please share more details.`;
 
-              return (
-                <motion.div
-                  key={index}
-                  variants={fadeInUp}
-                  whileHover={{ y: -6, scale: 1.02 }}
-                  className="group overflow-hidden rounded-2xl bg-white/[0.05] border border-white/[0.08] hover:border-cyan-400/30 shadow-[0_15px_35px_rgba(0,0,0,0.3)] hover:shadow-[0_25px_50px_rgba(6,182,212,0.12)] cursor-pointer flex flex-col justify-between h-full transition-all duration-500 sm:rounded-[2rem]"
-                >
-                  <div>
-                    <div className="relative overflow-hidden">
-                      <Image
-                        src={course.image}
-                        alt={course.title}
-                        width={600}
-                        height={500}
-                        sizes="(max-width: 640px) 50vw, (max-width: 1024px) 50vw, 33vw"
-                        className="h-[140px] w-full object-cover sm:h-[240px] transition-transform duration-700 group-hover:scale-105"
-                      />
+                return (
+                  <motion.div
+                    key={course.title}
+                    layout
+                    initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                    exit={{ opacity: 0, scale: 0.9, y: 20 }}
+                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                    whileHover={{ y: -6, scale: 1.02 }}
+                    className="group overflow-hidden rounded-2xl bg-white/[0.05] border border-white/[0.08] hover:border-cyan-400/30 shadow-[0_15px_35px_rgba(0,0,0,0.3)] hover:shadow-[0_25px_50px_rgba(6,182,212,0.12)] cursor-pointer flex flex-col justify-between h-full transition-all duration-500 sm:rounded-[2rem]"
+                  >
+                    <div>
+                      <div className="relative overflow-hidden">
+                        <Image
+                          src={course.image}
+                          alt={course.title}
+                          width={600}
+                          height={500}
+                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                          className="h-[180px] w-full object-cover sm:h-[240px] transition-transform duration-700 group-hover:scale-105"
+                        />
+                        <div className="absolute left-4 top-4 flex h-11 w-11 items-center justify-center rounded-xl bg-[#062232]/80 backdrop-blur-xl border border-white/10 text-[#67e8f9] sm:left-5 sm:top-5 sm:h-14 sm:w-14 sm:rounded-2xl transition-all duration-300 group-hover:scale-105 group-hover:bg-[#123b57] group-hover:text-white">
+                          <Icon className="h-5 w-5 sm:h-7 sm:w-7 transition-transform duration-500 group-hover:rotate-6" />
+                        </div>
+                      </div>
 
-                      <div className="absolute left-3 top-3 flex h-10 w-10 items-center justify-center rounded-xl bg-[#062232]/80 backdrop-blur-xl border border-white/10 text-[#67e8f9] sm:left-5 sm:top-5 sm:h-14 sm:w-14 sm:rounded-2xl transition-all duration-300 group-hover:scale-105 group-hover:bg-[#123b57] group-hover:text-white">
-                        <Icon className="h-5 w-5 sm:h-7 sm:w-7 transition-transform duration-500 group-hover:rotate-6" />
+                      <div className="p-5 sm:p-7">
+                        <h3 className="text-lg font-black leading-tight text-white sm:text-2xl tracking-tight uppercase group-hover:text-[#67e8f9] transition-colors duration-300">
+                          {course.title}
+                        </h3>
+                        <p className="mt-2 text-sm leading-6 text-white/75 font-light sm:mt-4 sm:text-[15px] sm:leading-7">
+                          {course.desc}
+                        </p>
                       </div>
                     </div>
 
-                    <div className="p-3 sm:p-7">
-                      <h3 className="text-[13px] font-black leading-tight text-white sm:text-2xl tracking-tight uppercase group-hover:text-[#67e8f9] transition-colors duration-300">
-                        {course.title}
-                      </h3>
-
-                      <p className="mt-2 text-[11px] leading-5 text-white/75 font-light sm:mt-4 sm:text-[15px] sm:leading-7">
-                        {course.desc}
-                      </p>
+                    <div className="p-5 sm:px-7 sm:pb-7 pt-0">
+                      <a
+                        href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-wider text-[#67e8f9] transition-all hover:text-cyan-300 hover:translate-x-1 duration-300 sm:text-sm sm:tracking-widest"
+                      >
+                        Enroll Now
+                        <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+                      </a>
                     </div>
-                  </div>
-
-                  <div className="p-3 sm:px-7 sm:pb-7 pt-0">
-                    <a
-                      href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
-                        message
-                      )}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 text-[9px] font-black uppercase tracking-wide text-[#67e8f9] transition-all hover:text-cyan-300 hover:scale-102 hover:translate-x-1 duration-300 sm:mt-0 sm:gap-2 sm:text-sm sm:tracking-widest"
-                    >
-                      Enroll Now
-                      <ArrowRight className="h-3.5 w-3.5 sm:h-4 sm:w-4 transition-transform duration-300 group-hover:translate-x-1" />
-                    </a>
-                  </div>
-                </motion.div>
-              );
-            })}
+                  </motion.div>
+                );
+              })}
+            </AnimatePresence>
           </motion.div>
         </div>
       </section>
@@ -257,10 +273,10 @@ export default function CoursesPage() {
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.8, ease: "easeOut" as const }}
-          className="mx-auto max-w-7xl rounded-[2rem] bg-[#062232]/30 border border-white/10 p-5 text-white sm:p-10 md:p-14 relative overflow-hidden"
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="mx-auto max-w-7xl rounded-[2rem] bg-[#062232]/30 border border-white/10 p-6 text-white sm:p-10 md:p-14 relative overflow-hidden"
         >
-          {/* Subtle slow breathing background glow */}
+          {/* Slow breathing background glow */}
           <motion.div
             animate={{
               scale: [1, 1.06, 1],
@@ -293,8 +309,7 @@ export default function CoursesPage() {
                 transition={{ duration: 0.7, delay: 0.1 }}
                 className="mt-4 text-[30px] font-black leading-[1.1] sm:text-5xl tracking-tight text-white"
               >
-                Become A Skilled
-                <span className="text-[#67e8f9]"> Professional Diver</span>
+                Become A Skilled <span className="text-[#67e8f9]">Professional Diver</span>
               </motion.h2>
             </div>
 
@@ -319,12 +334,12 @@ export default function CoursesPage() {
                 transition={{ duration: 0.8, delay: 0.3 }}
               >
                 <a
-                  href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
+                  href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
                     "Hello Dive Hub & Marine Services, I want to know more about your diving courses."
                   )}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-6 inline-flex items-center gap-2 rounded-full bg-[#67e8f9] hover:bg-cyan-300 px-6 py-3 text-[10px] font-black uppercase tracking-[0.18em] text-slate-950 transition-all duration-300 hover:scale-103 hover:shadow-[0_0_20px_rgba(34,211,238,0.4)] sm:text-xs"
+                  className="mt-6 inline-flex items-center gap-2 rounded-full bg-[#67e8f9] hover:bg-cyan-300 px-6 py-3 text-[10px] font-black uppercase tracking-[0.18em] text-slate-950 transition-all duration-300 hover:scale-105 hover:shadow-[0_0_20px_rgba(34,211,238,0.4)] sm:text-xs"
                 >
                   Contact Us
                   <ArrowRight className="h-4 w-4" />
