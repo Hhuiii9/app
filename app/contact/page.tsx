@@ -125,9 +125,17 @@ export default function ContactPage() {
                   Phone
                 </h3>
 
-                <p className="mt-2 text-[11px] leading-5 text-white/72 font-light sm:mt-4 sm:text-[15px] sm:leading-7">
-                  0484 2989390
-                </p>
+                <div className="mt-2 text-[11px] leading-5 text-white/72 font-light sm:mt-4 sm:text-[14px] sm:leading-7 flex flex-col space-y-1 sm:space-y-1.5">
+                  <a href="tel:04842989390" className="hover:text-[#67e8f9] transition-colors flex items-center gap-1">
+                    <span className="opacity-60">Landline:</span> 0484 2989390
+                  </a>
+                  <a href="tel:+916235107072" className="hover:text-[#67e8f9] transition-colors flex items-center gap-1">
+                    <span className="opacity-60">Mobile:</span> +91 6235107072
+                  </a>
+                  <a href="tel:+916235106062" className="hover:text-[#67e8f9] transition-colors flex items-center gap-1">
+                    <span className="opacity-60">Mobile:</span> +91 6235106062
+                  </a>
+                </div>
               </div>
             </motion.div>
 
@@ -263,6 +271,10 @@ export default function ContactPage() {
                       document.getElementById("message") as HTMLTextAreaElement
                     ).value;
 
+                    const contactNumber = (
+                      document.getElementById("contactNumber") as HTMLSelectElement
+                    ).value;
+
                     const whatsappMessage = `Hello Dive Hub & Marine Services,
 
 Name: ${name}
@@ -272,7 +284,7 @@ Phone: ${phone}
 Message:
 ${message}`;
 
-                    const whatsappUrl = `https://wa.me/916235107072?text=${encodeURIComponent(
+                    const whatsappUrl = `https://wa.me/${contactNumber}?text=${encodeURIComponent(
                       whatsappMessage
                     )}`;
 
@@ -302,6 +314,22 @@ ${message}`;
                     required
                     className="w-full rounded-2xl border border-white/10 bg-[#03131d]/60 px-5 py-4 text-sm text-white outline-none placeholder:text-white/30 focus:border-cyan-400 focus:shadow-[0_0_15px_rgba(34,211,238,0.15)] transition-all duration-300"
                   />
+
+                  <div className="relative w-full">
+                    <select
+                      id="contactNumber"
+                      required
+                      className="w-full rounded-2xl border border-white/10 bg-[#03131d]/60 px-5 py-4 text-sm text-white/70 outline-none focus:border-cyan-400 focus:text-white focus:shadow-[0_0_15px_rgba(34,211,238,0.15)] transition-all duration-300 appearance-none cursor-pointer"
+                    >
+                      <option value="916235107072" className="bg-[#03131d] text-white">Representative 1 (+91 6235107072)</option>
+                      <option value="916235106062" className="bg-[#03131d] text-white">Representative 2 (+91 6235106062)</option>
+                    </select>
+                    <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-cyan-400">
+                      <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                        <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
+                      </svg>
+                    </div>
+                  </div>
 
                   <textarea
                     id="message"

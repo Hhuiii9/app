@@ -48,7 +48,7 @@ export default function ContactCTA() {
                 {/* PHONE */}
                 <motion.div
                   whileHover={{ y: -4, borderColor: "rgba(34, 211, 238, 0.2)" }}
-                  className="flex items-center gap-4 rounded-2xl border border-white/5 bg-white/[0.02] p-4 transition-all duration-300"
+                  className="flex items-start gap-4 rounded-2xl border border-white/5 bg-white/[0.02] p-4 transition-all duration-300"
                 >
                   <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-cyan-500/10 border border-cyan-400/20 text-cyan-300">
                     <Phone className="h-5 w-5" />
@@ -56,11 +56,19 @@ export default function ContactCTA() {
 
                   <div>
                     <span className="text-[8px] uppercase tracking-widest text-slate-500">
-                      Direct Line
+                      Contact Numbers
                     </span>
-                    <p className="mt-0.5 text-xs sm:text-sm font-black text-white">
-                      0484 2989390
-                    </p>
+                    <div className="mt-0.5 text-[11px] sm:text-xs font-black text-white flex flex-col space-y-0.5">
+                      <a href="tel:04842989390" className="hover:text-cyan-300 transition-colors">
+                        Landline: 0484 2989390
+                      </a>
+                      <a href="tel:+916235107072" className="hover:text-cyan-300 transition-colors">
+                        Mobile: +91 6235107072
+                      </a>
+                      <a href="tel:+916235106062" className="hover:text-cyan-300 transition-colors">
+                        Mobile: +91 6235106062
+                      </a>
+                    </div>
                   </div>
                 </motion.div>
 

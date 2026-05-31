@@ -115,9 +115,17 @@ export default function Footer() {
                   <span className="text-[8px] uppercase tracking-widest text-slate-500">
                     Phone
                   </span>
-                  <p className="mt-0.5 text-xs sm:text-sm font-bold text-slate-300">
-                    0484 2989390
-                  </p>
+                  <div className="mt-0.5 text-[11px] sm:text-xs font-bold text-slate-300 flex flex-col space-y-0.5">
+                    <a href="tel:04842989390" className="hover:text-cyan-300 transition-colors">
+                      Landline: 0484 2989390
+                    </a>
+                    <a href="tel:+916235107072" className="hover:text-cyan-300 transition-colors">
+                      Mobile: +91 6235107072
+                    </a>
+                    <a href="tel:+916235106062" className="hover:text-cyan-300 transition-colors">
+                      Mobile: +91 6235106062
+                    </a>
+                  </div>
                 </div>
               </div>
 
