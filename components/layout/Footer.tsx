@@ -44,12 +44,12 @@ export default function Footer() {
                 />
               </div>
 
-              <div>
-                <h2 className="text-lg font-black uppercase tracking-[0.2em] text-white">
-                  Dive Hub &
+              <div className="flex flex-col items-start text-left select-none">
+                <h2 className="text-base sm:text-lg font-black uppercase tracking-[0.22em] text-white leading-none">
+                  DIVE HUB
                 </h2>
-                <p className="text-[9px] uppercase tracking-[0.25em] text-cyan-400 font-medium mt-0.5">
-                  Marine Services
+                <p className="text-[9px] sm:text-[10px] uppercase tracking-[0.25em] text-cyan-400 font-bold mt-1.5 leading-none">
+                  AND MARINE SERVICES
                 </p>
               </div>
             </div>

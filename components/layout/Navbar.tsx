@@ -35,12 +35,12 @@ export default function Navbar() {
             />
           </div>
 
-          <div>
-            <h1 className="text-xs sm:text-sm font-black uppercase tracking-[0.2em] text-white group-hover:text-cyan-300 transition-colors duration-300">
-              Dive Hub &
+          <div className="flex flex-col items-start text-left select-none">
+            <h1 className="text-xs sm:text-sm font-black uppercase tracking-[0.22em] text-white group-hover:text-cyan-300 transition-colors duration-300 leading-none">
+              DIVE HUB
             </h1>
-            <p className="text-[8px] sm:text-[9px] uppercase tracking-[0.25em] text-cyan-400 font-medium mt-0.5">
-              Marine Services
+            <p className="text-[8px] sm:text-[9px] uppercase tracking-[0.25em] text-cyan-400 font-semibold mt-1 leading-none">
+              AND MARINE SERVICES
             </p>
           </div>
         </Link>
@@ -105,9 +105,9 @@ export default function Navbar() {
               <Link
                 href="/"
                 onClick={() => setIsOpen(false)}
-                className="flex items-center gap-3"
+                className="flex items-center gap-2.5 group"
               >
-                <div className="relative h-12 w-12 overflow-hidden rounded-full border border-white/10 bg-white/5 shadow-md">
+                <div className="relative h-10 w-10 overflow-hidden rounded-full border border-white/10 bg-white/5 shadow-md">
                   <Image
                     src="/logo.png"
                     alt="Dive Hub & Marine Services"
@@ -116,14 +116,14 @@ export default function Navbar() {
                   />
                 </div>
 
-                <div>
-                  <h2 className="text-xs font-black uppercase tracking-[0.2em] text-white">
-                    Dive Hub &
-                  </h2>
-                  <p className="text-[8px] uppercase tracking-[0.25em] text-cyan-400">
-                    Marine Services
-                  </p>
-                </div>
+                  <div className="flex flex-col items-start text-left select-none">
+                    <h2 className="text-[10px] sm:text-xs font-black uppercase tracking-[0.22em] text-white leading-none">
+                      DIVE HUB
+                    </h2>
+                    <p className="text-[7.5px] sm:text-[8px] uppercase tracking-[0.25em] text-cyan-400 font-semibold mt-1 leading-none">
+                      AND MARINE SERVICES
+                    </p>
+                  </div>
               </Link>
 
               <button
