@@ -44,12 +44,15 @@ export default function Footer() {
                 />
               </div>
 
-              <div className="flex flex-col items-start text-left select-none">
-                <h2 className="text-base sm:text-lg font-black uppercase tracking-[0.22em] text-white leading-none">
+              <div className="flex flex-col items-center text-center select-none gap-1 sm:gap-1.5">
+                <h2 className="text-base sm:text-lg font-black uppercase tracking-[0.22em] text-white leading-none print:text-slate-900">
                   DIVE HUB
                 </h2>
-                <p className="text-[9px] sm:text-[10px] uppercase tracking-[0.25em] text-cyan-400 font-bold mt-1.5 leading-none">
-                  AND MARINE SERVICES
+                <span className="text-[8px] sm:text-[9px] font-bold uppercase tracking-[0.25em] text-cyan-400 leading-none print:text-cyan-700">
+                  &
+                </span>
+                <p className="text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.25em] text-cyan-400 leading-none print:text-cyan-700">
+                  MARINE SERVICES
                 </p>
               </div>
             </div>

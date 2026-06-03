@@ -35,12 +35,15 @@ export default function Navbar() {
             />
           </div>
 
-          <div className="flex flex-col items-start text-left select-none">
-            <h1 className="text-xs sm:text-sm font-black uppercase tracking-[0.22em] text-white group-hover:text-cyan-300 transition-colors duration-300 leading-none">
+          <div className="flex flex-col items-center text-center select-none gap-[3px] sm:gap-1">
+            <h1 className="text-xs sm:text-sm font-black uppercase tracking-[0.22em] text-white group-hover:text-cyan-300 transition-colors duration-300 leading-none print:text-slate-900">
               DIVE HUB
             </h1>
-            <p className="text-[8px] sm:text-[9px] uppercase tracking-[0.25em] text-cyan-400 font-semibold mt-1 leading-none">
-              AND MARINE SERVICES
+            <span className="text-[7px] sm:text-[8px] font-semibold uppercase tracking-[0.25em] text-cyan-400 leading-none print:text-cyan-700">
+              &
+            </span>
+            <p className="text-[8px] sm:text-[9px] font-semibold uppercase tracking-[0.25em] text-cyan-400 leading-none print:text-cyan-700">
+              MARINE SERVICES
             </p>
           </div>
         </Link>
@@ -116,12 +119,15 @@ export default function Navbar() {
                   />
                 </div>
 
-                  <div className="flex flex-col items-start text-left select-none">
-                    <h2 className="text-[10px] sm:text-xs font-black uppercase tracking-[0.22em] text-white leading-none">
+                  <div className="flex flex-col items-center text-center select-none gap-[2.5px] sm:gap-[3px]">
+                    <h2 className="text-[10px] sm:text-xs font-black uppercase tracking-[0.22em] text-white leading-none print:text-slate-900">
                       DIVE HUB
                     </h2>
-                    <p className="text-[7.5px] sm:text-[8px] uppercase tracking-[0.25em] text-cyan-400 font-semibold mt-1 leading-none">
-                      AND MARINE SERVICES
+                    <span className="text-[6.5px] sm:text-[7px] font-semibold uppercase tracking-[0.25em] text-cyan-400 leading-none print:text-cyan-700">
+                      &
+                    </span>
+                    <p className="text-[7.5px] sm:text-[8px] font-semibold uppercase tracking-[0.25em] text-cyan-400 leading-none print:text-cyan-700">
+                      MARINE SERVICES
                     </p>
                   </div>
               </Link>
