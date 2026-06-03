@@ -42,17 +42,17 @@ const courses: Course[] = [
   },
   {
     category: "scuba",
-    icon: LifeBuoy,
-    title: "Rescue Diver",
-    desc: "Learn to manage diving emergencies and become a highly capable dive partner.",
-    image: "/images/course-4.jpg",
-  },
-  {
-    category: "scuba",
     icon: HeartPulse,
     title: "Emergency First Response",
     desc: "An essential CPR and first aid course preparing you to manage medical emergencies both in and out of the water.",
     image: "/images/course-8.png",
+  },
+  {
+    category: "scuba",
+    icon: LifeBuoy,
+    title: "Rescue Diver",
+    desc: "Learn to manage diving emergencies and become a highly capable dive partner.",
+    image: "/images/course-4.jpg",
   },
   {
     category: "scuba",
