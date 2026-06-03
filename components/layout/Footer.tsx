@@ -162,7 +162,7 @@ export default function Footer() {
                     Location
                   </span>
                   <p className="mt-0.5 text-xs sm:text-sm font-bold text-slate-300 group-hover:text-cyan-300 transition-colors">
-                    Eloor, Ernakulam, Kerala
+                    Angamaly, Ernakulam, Kerala
                   </p>
                 </div>
               </a>

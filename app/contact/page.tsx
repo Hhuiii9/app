@@ -182,7 +182,7 @@ export default function ContactPage() {
                   </h3>
 
                   <p className="mt-2 text-[11px] leading-5 text-white/72 font-light sm:mt-4 sm:text-[15px] sm:leading-7">
-                    Eloor, Ernakulam<br />
+                    Angamaly, Ernakulam<br />
                     Kerala, India
                   </p>
                 </div>
