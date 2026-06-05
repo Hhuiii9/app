@@ -34,27 +34,19 @@ export default function Footer() {
           <div className="lg:col-span-2 flex flex-col items-start">
             
             {/* Logo */}
-            <div className="flex items-center gap-4">
-              <div className="relative h-14 w-14 overflow-hidden rounded-full border border-white/10 bg-white/5 shadow-md">
+            <div className="flex items-center gap-3.5">
+              <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-full border border-white/10 bg-white/5 shadow-md">
                 <Image
                   src="/logo.png"
-                  alt="Dive Hub & Marine Services Logo"
+                  alt="Dive Hub &amp; Marine Services Logo"
                   fill
                   className="object-cover"
                 />
               </div>
 
-              <div className="flex flex-col items-center text-center select-none gap-1 sm:gap-1.5">
-                <h2 className="text-base sm:text-lg font-black uppercase tracking-[0.22em] text-white leading-none print:text-slate-900">
-                  DIVE HUB
-                </h2>
-                <span className="text-[8px] sm:text-[9px] font-bold uppercase tracking-[0.25em] text-cyan-400 leading-none print:text-cyan-700">
-                  &
-                </span>
-                <p className="text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.25em] text-cyan-400 leading-none print:text-cyan-700">
-                  MARINE SERVICES
-                </p>
-              </div>
+              <span className="text-sm sm:text-base font-semibold tracking-wider text-white select-none whitespace-nowrap">
+                DIVE HUB <span className="text-[#22D3EE] font-semibold">&amp;</span> Marine Services
+              </span>
             </div>
 
             {/* Description narrative */}
@@ -172,8 +164,8 @@ export default function Footer() {
 
         {/* BOTTOM ATTRIBUTIONS TRACK */}
         <div className="mt-16 border-t border-white/5 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-[10px] sm:text-xs text-slate-500 font-light">
-            © {new Date().getFullYear()} Dive Hub & Marine Services. All Rights Reserved.
+          <p className="text-[10px] sm:text-xs text-slate-500 font-light tracking-wide">
+            © 2026 Dive Hub &amp; Marine Services. All Rights Reserved.
           </p>
 
           <p className="text-[10px] sm:text-xs text-slate-500 font-light tracking-wide">

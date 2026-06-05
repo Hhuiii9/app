@@ -25,27 +25,19 @@ export default function Navbar() {
         
         {/* BRAND LOGO */}
         <Link href="/" className="flex items-center gap-3 group">
-          <div className="relative h-12 w-12 overflow-hidden rounded-full border border-white/10 bg-white/5 shadow-lg sm:h-13 sm:w-13 transition-transform duration-300 group-hover:scale-105">
+          <div className="relative h-10 w-10 sm:h-11 sm:w-11 md:h-12 md:w-12 shrink-0 overflow-hidden rounded-full border border-white/10 bg-white/5 shadow-lg transition-transform duration-300 group-hover:scale-105">
             <Image
               src="/logo.png"
-              alt="Dive Hub & Marine Services"
+              alt="Dive Hub &amp; Marine Services"
               fill
               className="object-cover"
               priority
             />
           </div>
 
-          <div className="flex flex-col items-center text-center select-none gap-[3px] sm:gap-1">
-            <h1 className="text-xs sm:text-sm font-black uppercase tracking-[0.22em] text-white group-hover:text-cyan-300 transition-colors duration-300 leading-none print:text-slate-900">
-              DIVE HUB
-            </h1>
-            <span className="text-[7px] sm:text-[8px] font-semibold uppercase tracking-[0.25em] text-cyan-400 leading-none print:text-cyan-700">
-              &
-            </span>
-            <p className="text-[8px] sm:text-[9px] font-semibold uppercase tracking-[0.25em] text-cyan-400 leading-none print:text-cyan-700">
-              MARINE SERVICES
-            </p>
-          </div>
+          <h1 className="text-xs sm:text-sm md:text-base font-semibold tracking-wider text-white select-none whitespace-nowrap print:text-slate-900">
+            DIVE HUB <span className="text-[#22D3EE] font-semibold">&amp;</span> Marine Services
+          </h1>
         </Link>
 
         {/* DESKTOP NAV LINKS */}
@@ -108,28 +100,20 @@ export default function Navbar() {
               <Link
                 href="/"
                 onClick={() => setIsOpen(false)}
-                className="flex items-center gap-2.5 group"
+                className="flex items-center gap-3 group"
               >
-                <div className="relative h-10 w-10 overflow-hidden rounded-full border border-white/10 bg-white/5 shadow-md">
+                <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-full border border-white/10 bg-white/5 shadow-md">
                   <Image
                     src="/logo.png"
-                    alt="Dive Hub & Marine Services"
+                    alt="Dive Hub &amp; Marine Services"
                     fill
                     className="object-cover"
                   />
                 </div>
 
-                  <div className="flex flex-col items-center text-center select-none gap-[2.5px] sm:gap-[3px]">
-                    <h2 className="text-[10px] sm:text-xs font-black uppercase tracking-[0.22em] text-white leading-none print:text-slate-900">
-                      DIVE HUB
-                    </h2>
-                    <span className="text-[6.5px] sm:text-[7px] font-semibold uppercase tracking-[0.25em] text-cyan-400 leading-none print:text-cyan-700">
-                      &
-                    </span>
-                    <p className="text-[7.5px] sm:text-[8px] font-semibold uppercase tracking-[0.25em] text-cyan-400 leading-none print:text-cyan-700">
-                      MARINE SERVICES
-                    </p>
-                  </div>
+                <span className="text-xs sm:text-sm font-semibold tracking-wider text-white select-none whitespace-nowrap">
+                  DIVE HUB <span className="text-[#22D3EE] font-semibold">&amp;</span> Marine Services
+                </span>
               </Link>
 
               <button
