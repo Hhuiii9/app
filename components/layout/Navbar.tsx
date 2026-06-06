@@ -12,6 +12,7 @@ const navLinks = [
   { name: "About", href: "/about" },
   { name: "What We Offer", href: "/what-we-offer" },
   { name: "Courses", href: "/courses" },
+  { name: "Location", href: "/location" },
   { name: "Contact", href: "/contact" },
 ];
 
@@ -35,9 +36,9 @@ export default function Navbar() {
             />
           </div>
 
-          <h1 className="flex flex-col items-center justify-center text-center select-none leading-[1.05] print:text-slate-900">
+          <h1 className="flex flex-col items-center justify-center text-center select-none leading-[1.0] print:text-slate-900">
             <span className="text-[10px] sm:text-[11px] md:text-[12px] font-bold text-white tracking-[0.18em]">DIVE HUB</span>
-            <span className="text-[8px] sm:text-[9px] md:text-[10px] font-semibold text-[#22D3EE] my-0.5">&amp;</span>
+            <span className="text-xs sm:text-sm md:text-base font-black text-[#22D3EE] my-0.5 leading-none transition-transform duration-300 group-hover:scale-110 drop-shadow-[0_0_8px_rgba(34,211,238,0.35)]">&amp;</span>
             <span className="text-[10px] sm:text-[11px] md:text-[12px] font-bold text-white tracking-[0.18em]">MARINE SERVICES</span>
           </h1>
         </Link>
@@ -113,9 +114,9 @@ export default function Navbar() {
                   />
                 </div>
 
-                <span className="flex flex-col items-center justify-center text-center select-none leading-[1.05]">
+                <span className="flex flex-col items-center justify-center text-center select-none leading-[1.0]">
                   <span className="text-[10px] sm:text-[11px] md:text-[12px] font-bold text-white tracking-[0.18em]">DIVE HUB</span>
-                  <span className="text-[8px] sm:text-[9px] md:text-[10px] font-semibold text-[#22D3EE] my-0.5">&amp;</span>
+                  <span className="text-xs sm:text-sm md:text-base font-black text-[#22D3EE] my-0.5 leading-none transition-transform duration-300 group-hover:scale-110 drop-shadow-[0_0_8px_rgba(34,211,238,0.35)]">&amp;</span>
                   <span className="text-[10px] sm:text-[11px] md:text-[12px] font-bold text-white tracking-[0.18em]">MARINE SERVICES</span>
                 </span>
               </Link>

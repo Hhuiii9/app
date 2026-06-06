@@ -3,6 +3,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import Link from "next/link";
 
 type Bubble = {
   id: number;
@@ -225,10 +226,10 @@ export default function OfferSection() {
           }}
           className="mt-10"
         >
-          <button className="group inline-flex items-center gap-3 rounded-full border border-cyan-300/40 bg-cyan-950/25 px-8 py-4 text-xs font-black uppercase tracking-[0.25em] text-cyan-300 backdrop-blur-xl transition-all duration-300 hover:bg-cyan-300 hover:text-[#03131d] hover:shadow-[0_0_35px_rgba(103,232,249,0.55)]">
+          <Link href="/what-we-offer" className="group inline-flex items-center gap-3 rounded-full border border-cyan-300/40 bg-cyan-950/25 px-8 py-4 text-xs font-black uppercase tracking-[0.25em] text-cyan-300 backdrop-blur-xl transition-all duration-300 hover:bg-cyan-300 hover:text-[#03131d] hover:shadow-[0_0_35px_rgba(103,232,249,0.55)]">
             Explore Services
             <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-2" />
-          </button>
+          </Link>
         </motion.div>
       </div>
     </section>

@@ -73,7 +73,7 @@ const courses = [
       icon: HardHat,
       title: "All Underwater Works",
       desc: "Comprehensive training in marine construction, subsea engineering, and hyperbaric operations, covering everything from civil concrete placement to deep-sea technical diving.",
-      image: "/images/course-7.jpg",
+      image: "/images/course-7.JPG",
     }
   ];
 

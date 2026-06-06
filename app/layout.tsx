@@ -98,6 +98,47 @@ export const metadata: Metadata = {
   },
 };
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Dive Hub & Marine Services",
+  "image": "https://www.divehubmarineservices.com/logo.png",
+  "@id": "https://www.divehubmarineservices.com/#localbusiness",
+  "url": "https://www.divehubmarineservices.com",
+  "telephone": "+916235107072",
+  "priceRange": "$$",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Angamaly",
+    "addressLocality": "Ernakulam",
+    "addressRegion": "Kerala",
+    "postalCode": "683572",
+    "addressCountry": "IN"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 10.1831751,
+    "longitude": 76.3793488
+  },
+  "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday"
+    ],
+    "opens": "09:00",
+    "closes": "19:00"
+  },
+  "sameAs": [
+    "https://www.facebook.com/divehubmarineservices",
+    "https://www.instagram.com/divehubmarineservices"
+  ]
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -106,6 +147,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="bg-[#03131d] text-white antialiased">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         <SmoothScroll>
           <Navbar />
           <main>{children}</main>
