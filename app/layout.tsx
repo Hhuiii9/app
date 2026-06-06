@@ -5,6 +5,7 @@ import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import SmoothScroll from "@/components/layout/SmoothScroll";
+import Script from "next/script";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.divehubmarineservices.com"),
@@ -147,6 +148,18 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="bg-[#03131d] text-white antialiased">
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-0MZ3T0BNER"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-0MZ3T0BNER');
+          `}
+        </Script>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
