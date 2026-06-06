@@ -35,8 +35,10 @@ export default function Navbar() {
             />
           </div>
 
-          <h1 className="text-xs sm:text-sm md:text-base font-semibold tracking-wider text-white select-none whitespace-nowrap print:text-slate-900">
-            DIVE HUB <span className="text-[#22D3EE] font-semibold">&amp;</span> Marine Services
+          <h1 className="flex flex-col items-center justify-center text-center select-none font-black leading-[1.1] text-white print:text-slate-900">
+            <span className="text-[10px] sm:text-xs tracking-[0.2em] font-extrabold">DIVE HUB</span>
+            <span className="text-base sm:text-lg text-[#22D3EE] font-black my-0.5 leading-none transition-transform duration-300 group-hover:scale-115 drop-shadow-[0_0_8px_rgba(34,211,238,0.35)]">&amp;</span>
+            <span className="text-[7px] sm:text-[9px] tracking-[0.25em] font-bold text-slate-300">MARINE SERVICES</span>
           </h1>
         </Link>
 
@@ -111,8 +113,10 @@ export default function Navbar() {
                   />
                 </div>
 
-                <span className="text-xs sm:text-sm font-semibold tracking-wider text-white select-none whitespace-nowrap">
-                  DIVE HUB <span className="text-[#22D3EE] font-semibold">&amp;</span> Marine Services
+                <span className="flex flex-col items-center justify-center text-center select-none font-black leading-[1.1] text-white">
+                  <span className="text-[10px] sm:text-xs tracking-[0.2em] font-extrabold">DIVE HUB</span>
+                  <span className="text-base sm:text-lg text-[#22D3EE] font-black my-0.5 leading-none transition-transform duration-300 group-hover:scale-115 drop-shadow-[0_0_8px_rgba(34,211,238,0.35)]">&amp;</span>
+                  <span className="text-[7px] sm:text-[9px] tracking-[0.25em] font-bold text-slate-300">MARINE SERVICES</span>
                 </span>
               </Link>
 
