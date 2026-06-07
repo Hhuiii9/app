@@ -126,8 +126,8 @@ export default function LocationClient() {
                     <div>
                       <h4 className="text-sm font-bold text-white uppercase tracking-wider">GPS Coordinates</h4>
                       <p className="mt-1 text-sm text-slate-300 font-light leading-relaxed">
-                        Latitude: 10.1831751 N<br />
-                        Longitude: 76.3793488 E
+                        Latitude: 10.1926394 N<br />
+                        Longitude: 76.3869289 E
                       </p>
                     </div>
                   </div>
@@ -151,7 +151,7 @@ export default function LocationClient() {
               {/* Action Button */}
               <div className="mt-8 pt-6 border-t border-white/5 flex flex-col gap-4">
                 <a
-                  href="https://www.google.com/maps/place/10%C2%B010'59.4%22N+76%C2%B022'45.7%22E/@10.183175,76.379349,17z/data=!4m4!3m3!8m2!3d10.1831751!4d76.3793488?hl=en&entry=ttu"
+                  href="https://www.google.com/maps/place/Dive+Hub+%26+Marine+Services/@10.1926394,76.3869289,17z/data=!3m1!4b1!4m6!3m5!1s0x3b0807c7ec9c75e9:0xbc174757022bb9ee!8m2!3d10.1926394!4d76.3869289!16s%2Fg%2F11z9rfxttv?entry=ttu&g_ep=EgoyMDI2MDYwMy4xIKXMDSoASAFQAw%3D%3D"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group inline-flex items-center justify-center gap-2 rounded-full bg-[#67e8f9] hover:bg-cyan-300 px-6 py-3.5 text-xs font-black uppercase tracking-[0.18em] text-slate-950 transition-all duration-300 hover:scale-105"
@@ -185,7 +185,7 @@ export default function LocationClient() {
               </div>
 
               <iframe
-                src="https://maps.google.com/maps?q=10.1831751,76.3793488&z=16&hl=en&output=embed"
+                src="https://maps.google.com/maps?q=Dive%20Hub%20%26%20Marine%20Services,%20Angamaly,%20Kerala,%20India&z=16&hl=en&output=embed"
                 className="h-[400px] w-full lg:h-full min-h-[450px] opacity-80"
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"

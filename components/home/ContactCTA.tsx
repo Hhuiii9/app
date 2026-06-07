@@ -128,7 +128,7 @@ export default function ContactCTA() {
 
               {/* DYNAMIC MAP */}
               <iframe
-                src="https://maps.google.com/maps?q=10.1831751,76.3793488&z=17&hl=en&output=embed"
+                src="https://maps.google.com/maps?q=Dive%20Hub%20%26%20Marine%20Services,%20Angamaly,%20Kerala,%20India&z=17&hl=en&output=embed"
                 className="h-[280px] w-full sm:h-[350px] border-none brightness-[0.8] contrast-[1.1] grayscale-[30%] invert-[90%]"
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
