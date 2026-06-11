@@ -45,10 +45,10 @@ export default function Footer() {
                 />
               </div>
 
-              <span className="flex flex-col items-center justify-center text-center select-none leading-[1.0]">
-                <span className="text-[10px] sm:text-[11px] md:text-[12px] font-bold text-white tracking-[0.18em]">DIVE HUB</span>
-                <span className="text-xs sm:text-sm md:text-base font-black text-[#22D3EE] my-0.5 leading-none transition-transform duration-300 hover:scale-110 drop-shadow-[0_0_8px_rgba(34,211,238,0.35)]">&amp;</span>
-                <span className="text-[10px] sm:text-[11px] md:text-[12px] font-bold text-white tracking-[0.18em]">MARINE SERVICES</span>
+              <span className="flex items-center gap-1.5 sm:gap-2 select-none text-[10px] sm:text-xs md:text-sm font-bold tracking-[0.15em] text-white whitespace-nowrap">
+                <span>DIVE HUB</span>
+                <span className="text-xs sm:text-sm font-black text-[#22D3EE] transition-transform duration-300 hover:scale-110 drop-shadow-[0_0_8px_rgba(34,211,238,0.35)]">&amp;</span>
+                <span>MARINE SERVICES</span>
               </span>
             </div>
 
